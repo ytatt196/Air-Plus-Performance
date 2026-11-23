@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Promotion | Air Plus Performance</title>
+
+<style>
+:root {
+  --black: #101010;
+  --dark: #1c1c1c;
+  --gold: #c9a44c;
+  --white: #ffffff;
+  --grey: #aaaaaa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background: #080808;
+  border-bottom: 2px solid var(--gold);
+  padding: 22px 20px;
+  text-align: center;
+}
+
+.logo {
+  color: var(--gold);
+  font-size: 25px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: var(--gold);
+}
+
+.hero {
+  text-align: center;
+  padding: 70px 20px 45px;
+  background: linear-gradient(
+    135deg, #111111, #30291c, #111111
+  );
+}
+
+.hero h1 {
+  color: var(--gold);
+  font-size: 40px;
+  margin: 0 0 20px;
+}
+
+.hero h2 {
+  font-size: 25px;
+  margin: 0 0 15px;
+}
+
+.hero p {
+  color: var(--grey);
+  line-height: 1.7;
+}
+
+.container {
+  max-width: 1050px;
+  margin: auto;
+  padding: 45px 20px 70px;
+}
+
+.gift-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 25px;
+}
+
+.gift-card {
+  background: var(--dark);
+  border: 1px solid #44391e;
+  border-radius: 12px;
+  padding: 35px 25px;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.gift-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(201,164,76,0.15);
+}
+
+.gift-icon {
+  font-size: 65px;
+  margin-bottom: 20px;
+}
+
+.gift-card h3 {
+  color: var(--gold);
+  font-size: 25px;
+}
+
+.gift-card p {
+  color: var(--grey);
+  line-height: 1.6;
+}
+
+.note {
+  color: var(--grey);
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 35px auto;
+}
+
+.contact {
+  text-align: center;
+  margin-top: 35px;
+}
+
+.button {
+  display: inline-block;
+  padding: 15px 25px;
+  background: var(--gold);
+  color: #111;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.button:hover {
+  background: #e4c46d;
+  transform: translateY(-2px);
+}
+
+footer {
+  padding: 30px;
+  text-align: center;
+  background: #080808;
+  color: var(--grey);
+  border-top: 1px solid #44391e;
+}
+
+@media (max-width: 600px) {
+  .logo {
+    font-size: 19px;
+  }
+
+  .navbar {
+    gap: 12px;
+  }
+
+  .navbar a {
+    font-size: 12px;
+  }
+
+  .hero {
+    padding: 50px 20px 35px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .hero h2 {
+    font-size: 21px;
+  }
+
+  .gift-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">AIR PLUS PERFORMANCE</div>
+
+  <nav class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="index.html#cars">OUR CARS</a>
+    <a href="promotion.html" class="active">PROMOTION</a>
+    <a href="https://wa.me/601111073280"
+       target="_blank"
+       rel="noopener noreferrer">CONTACT US</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h1>SPECIAL PROMOTION</h1>
+    <h2>BUY A CAR & GET A FREE GIFT!</h2>
+
+    <p>
+      Find your dream car at Air Plus Performance
+      and enjoy an extra gift with your purchase!
+    </p>
+  </section>
+
+  <section class="container">
+
+    <div class="gift-grid">
+
+      <div class="gift-card">
+        <div class="gift-icon">☀️</div>
+        <h3>FREE TINTED</h3>
+        <p>
+          Get complimentary window tinting
+          with selected car purchases.
+        </p>
+      </div>
+
+      <div class="gift-card">
+        <div class="gift-icon">📱</div>
+        <h3>FREE PLAYER</h3>
+        <p>
+          Get a complimentary car multimedia
+          player with selected car purchases.
+        </p>
+      </div>
+
+    </div>
+
+    <p class="note">
+      *Free gift depends on the selected car model.
+      Gift type is subject to confirmation by
+      Air Plus Performance. Terms & conditions apply.
+    </p>
+
+    <div class="contact">
+      <a class="button"
+         href="https://wa.me/601111073280?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20your%20promotion"
+         target="_blank"
+         rel="noopener noreferrer">
+        WHATSAPP US FOR MORE INFO
+      </a>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>Air Plus Performance</p>
+  <p>Bank Loan | Loan Kedai | Sewa</p>
+  <p>&copy; 2026 Air Plus Performance</p>
+</footer>
+
+</body>
+</html>
