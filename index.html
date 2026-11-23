@@ -121,6 +121,47 @@ header {
   font-size: 30px;
 }
 
+.car-filters {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+  margin: 25px 0;
+}
+
+.car-filters select {
+  width: 100%;
+  padding: 13px;
+  background: #1c1c1c;
+  color: #ffffff;
+  border: 1px solid #44391e;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.car-filters select:focus {
+  outline: 1px solid var(--gold);
+  border-color: var(--gold);
+}
+
+.car-filters .button {
+  width: 100%;
+  cursor: pointer;
+  border: none;
+}
+
+@media (max-width: 900px) {
+  .car-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .car-filters {
+    grid-template-columns: 1fr;
+  }
+}
+
 .search-box {
   width: 100%;
   padding: 15px;
@@ -266,8 +307,40 @@ footer {
 
 
 <section class="section" id="cars">
+
   <h2>OUR CARS</h2>
 
+
+<div class="car-filters">
+
+  <select id="brandFilter">
+    <option value="">All Brands</option>
+  </select>
+
+  <select id="modelFilter">
+    <option value="">All Models</option>
+  </select>
+
+  <select id="priceFilter">
+    <option value="">Any Price</option>
+    <option value="20000">Below RM20,000</option>
+    <option value="30000">Below RM30,000</option>
+    <option value="40000">Below RM40,000</option>
+    <option value="50000">Below RM50,000</option>
+    <option value="60000">Below RM60,000</option>
+    <option value="80000">Below RM80,000</option>
+    <option value="100000">Below RM100,000</option>
+    <option value="150000">Below RM150,000</option>
+    <option value="200000">Below RM200,000</option>
+  </select>
+
+  <button type="button"
+          class="button"
+          onclick="searchCars()">
+    SEARCH CARS
+  </button>
+
+</div>
 
   <input
     type="text"
@@ -357,11 +430,123 @@ footer {
   <p>&copy; 2026 Air Plus Performance</p>
 </footer>
 
+
 <script>
+
+// Brand and Model List
+const carModels = {
+  "Perodua": [
+    "Myvi", "Axia", "Bezza", "Alza",
+    "Ativa", "Aruz", "Viva", "Kelisa", "Kancil"
+  ],
+  "Proton": [
+    "Saga", "Persona", "Iriz", "Preve",
+    "Exora", "Wira", "Waja", "Gen-2",
+    "Satria", "Perdana", "X50", "X70",
+    "X90", "S70"
+  ],
+  "Toyota": [
+    "Vios", "Yaris", "Corolla", "Altis",
+    "Camry", "Hilux", "Innova", "Avanza",
+    "Rush", "Fortuner", "Alphard", "Vellfire"
+  ],
+  "Honda": [
+    "City", "Civic", "Jazz", "HR-V",
+    "CR-V", "BR-V", "Accord", "WR-V"
+  ],
+  "Nissan": [
+    "Almera", "Grand Livina", "Serena",
+    "Navara", "X-Trail", "Teana"
+  ],
+  "Mazda": [
+    "Mazda 2", "Mazda 3", "Mazda 6",
+    "CX-3", "CX-5", "CX-8", "CX-30"
+  ],
+  "Mitsubishi": [
+    "Triton", "ASX", "Outlander",
+    "Xpander", "Pajero Sport"
+  ],
+  "Isuzu": ["D-Max", "MU-X"],
+  "Ford": [
+    "Ranger", "Everest", "Fiesta", "Focus"
+  ],
+  "Hyundai": [
+    "Elantra", "Accent", "Tucson",
+    "Santa Fe", "Starex"
+  ],
+  "Kia": [
+    "Picanto", "Rio", "Cerato",
+    "Sportage", "Sorento", "Carnival"
+  ],
+  "Suzuki": [
+    "Swift", "Alto", "Celerio",
+    "Vitara", "Jimny"
+  ],
+  "Volkswagen": [
+    "Polo", "Vento", "Jetta",
+    "Golf", "Passat", "Tiguan"
+  ],
+  "BMW": [
+    "1 Series", "3 Series", "5 Series",
+    "X1", "X3", "X5"
+  ],
+  "Mercedes-Benz": [
+    "A-Class", "C-Class", "E-Class",
+    "GLA", "GLC"
+  ],
+  "Subaru": ["XV", "Forester", "Impreza"],
+  "Lexus": ["IS", "ES", "NX", "RX"],
+  "Audi": ["A3", "A4", "A6", "Q3", "Q5"],
+  "Peugeot": ["208", "3008", "5008"],
+  "Chery": ["Omoda 5", "Tiggo 7", "Tiggo 8"],
+  "BYD": ["Atto 3", "Dolphin", "Seal"],
+  "GWM": ["Haval H6", "Ora Good Cat", "Tank 300"],
+  "MG": ["MG4", "MG5", "ZS"],
+  "Jetour": ["Dashing", "X70 Plus"],
+  "Jaecoo": ["J7", "J8"],
+  "Omoda": ["C5", "E5"]
+};
+
+// Get filter elements
+const brandFilter = document.getElementById("brandFilter");
+const modelFilter = document.getElementById("modelFilter");
+const priceFilter = document.getElementById("priceFilter");
+
+// Add all brands
+Object.keys(carModels).sort().forEach(brand => {
+  const option = document.createElement("option");
+  option.value = brand;
+  option.textContent = brand;
+  brandFilter.appendChild(option);
+});
+
+// Update models when brand changes
+function updateModels() {
+  modelFilter.innerHTML = '<option value="">All Models</option>';
+
+  const brand = brandFilter.value;
+
+  if (brand && carModels[brand]) {
+    carModels[brand].forEach(model => {
+      const option = document.createElement("option");
+      option.value = model;
+      option.textContent = model;
+      modelFilter.appendChild(option);
+    });
+  }
+
+  modelFilter.disabled = !brand;
+  searchCars();
+}
+
+// Search and filter cars
 function searchCars() {
-  const query = document
-    .getElementById("search")
-    .value.toLowerCase();
+  const query = document.getElementById("search")
+    .value.toLowerCase().trim();
+
+  const brand = brandFilter.value.toLowerCase();
+  const model = modelFilter.value.toLowerCase();
+  const maxPrice = Number(priceFilter.value);
 
   const cars = document.querySelectorAll(".car-card");
   let visible = 0;
@@ -370,7 +555,29 @@ function searchCars() {
     const name = car.querySelector("h3")
       .textContent.toLowerCase();
 
-    const match = name.includes(query);
+    const priceText = car.querySelector(".car-price")
+      .textContent;
+
+    const price = Number(
+      priceText.replace(/[^0-9.]/g, "")
+    );
+
+    const matchText = name.includes(query);
+    const matchBrand = !brand ||
+      name.startsWith(brand + " ");
+
+    const modelPart = brand ?
+      name.slice(brand.length).trim() : name;
+
+    const matchModel = !model ||
+      modelPart === model ||
+      modelPart.startsWith(model + " ");
+
+    const matchPrice = !maxPrice || price <= maxPrice;
+
+    const match = matchText && matchBrand &&
+      matchModel && matchPrice;
+
     car.style.display = match ? "" : "none";
 
     if (match) visible++;
@@ -379,7 +586,17 @@ function searchCars() {
   document.getElementById("noResults")
     .style.display = visible === 0 ? "block" : "none";
 }
+
+// Connect dropdowns
+brandFilter.addEventListener("change", updateModels);
+modelFilter.addEventListener("change", searchCars);
+priceFilter.addEventListener("change", searchCars);
+
+// Initial setup
+modelFilter.disabled = true;
+
 </script>
+
 
 </body>
 </html>
