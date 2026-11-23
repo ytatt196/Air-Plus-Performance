@@ -123,7 +123,7 @@ header {
 
 .car-filters {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 15px;
   margin: 25px 0;
 }
@@ -148,6 +148,17 @@ header {
   width: 100%;
   cursor: pointer;
   border: none;
+}
+
+.car-filters .reset-button {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+}
+
+.car-filters .reset-button:hover {
+  background: #30291c;
+  color: var(--gold);
 }
 
 @media (max-width: 900px) {
@@ -339,6 +350,13 @@ footer {
           onclick="searchCars()">
     SEARCH CARS
   </button>
+  
+<button type="button"
+        class="button reset-button"
+        onclick="resetFilters()">
+  RESET FILTERS
+</button>
+
 
 </div>
 
@@ -594,6 +612,15 @@ priceFilter.addEventListener("change", searchCars);
 
 // Initial setup
 modelFilter.disabled = true;
+  
+function resetFilters() {
+  brandFilter.value = "";
+  updateModels();
+  priceFilter.value = "";
+  document.getElementById("search").value = "";
+  searchCars();
+}
+
 
 </script>
 
