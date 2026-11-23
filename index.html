@@ -128,6 +128,8 @@ header {
   border-radius: 12px;
   overflow: hidden;
   transition: 0.2s;
+  display: flex;
+  flex-direction: column;
 }
 
 .car-card:hover {
@@ -157,8 +159,10 @@ header {
 
 .car-info {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
-
 .car-info h3 {
   margin: 0 0 10px;
 }
@@ -174,11 +178,10 @@ header {
   margin: 18px 0;
 }
 
-.car-card .button {
-  display: block;
+.car-info .button {
+  margin-top: auto;
   text-align: center;
 }
-
 footer {
   padding: 30px;
   text-align: center;
