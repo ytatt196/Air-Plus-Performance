@@ -31,12 +31,20 @@ header {
   text-align: center;
 }
 
+
 .logo {
-  color: var(--gold);
-  font-size: 25px;
-  font-weight: bold;
-  letter-spacing: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.logo img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+}
+
   .navbar {
   display: flex;
   justify-content: center;
@@ -283,7 +291,9 @@ footer {
 
 
 <header id="home">
-  <div class="logo">AIR PLUS PERFORMANCE</div>
+  <div class="logo">
+  <img src="air-plus-logo.jpg" alt="Air Plus Performance Logo">
+</div>
 
   <nav class="navbar">
     <a href="index.html">HOME</a>
