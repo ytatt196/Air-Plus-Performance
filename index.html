@@ -37,6 +37,36 @@ header {
   font-weight: bold;
   letter-spacing: 2px;
 }
+  .navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 18px;
+}
+
+.navbar a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.navbar a:hover {
+  color: var(--gold);
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    gap: 12px;
+  }
+
+  .navbar a {
+    font-size: 12px;
+  }
+}
 
 .hero {
   padding: 70px 20px;
@@ -199,9 +229,20 @@ footer {
 
 <body>
 
-<header>
+
+<header id="home">
   <div class="logo">AIR PLUS PERFORMANCE</div>
+
+  <nav class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="index.html#cars">OUR CARS</a>
+    <a href="promotion.html">PROMOTION</a>
+    <a href="https://wa.me/601111073280"
+       target="_blank"
+       rel="noopener noreferrer">CONTACT US</a>
+  </nav>
 </header>
+
 
 <section class="hero">
   <h1>FIND YOUR DREAM CAR</h1>
