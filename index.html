@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air Plus Performance | Car Showroom</title>
+
+  <style>
+    :root {
+      --black: #111111;
+      --dark: #1c1c1c;
+      --gold: #c9a44c;
+      --white: #ffffff;
+      --grey: #b8b8b8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--white);
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background: var(--dark);
+      padding: 22px 20px;
+      text-align: center;
+      border-bottom: 2px solid var(--gold);
+    }
+
+    .logo {
+      color: var(--gold);
+      font-size: 25px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 90px 20px;
+      background: linear-gradient(
+        135deg,
+        #111111,
+        #29251b,
+        #111111
+      );
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      color: var(--grey);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .services {
+      margin: 30px 0;
+      color: var(--gold);
+      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 15px 30px;
+      background: var(--gold);
+      color: var(--black);
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      background: #e4c46d;
+      transform: translateY(-2px);
+    }
+
+    .section {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .section h2 {
+      color: var(--gold);
+      font-size: 30px;
+    }
+
+    .section p {
+      color: var(--grey);
+      line-height: 1.7;
+    }
+
+    .service-boxes {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .service-box {
+      background: var(--dark);
+      border: 1px solid #4b3e20;
+      border-radius: 10px;
+      padding: 25px;
+      width: 230px;
+    }
+
+    .service-box h3 {
+      color: var(--gold);
+    }
+
+    footer {
+      background: #080808;
+      text-align: center;
+      padding: 25px;
+      color: var(--grey);
+      border-top: 1px solid #4b3e20;
+    }
+
+    @media (max-width: 600px) {
+      .logo {
+        font-size: 19px;
+      }
+
+      .hero {
+        padding: 65px 20px;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .service-box {
+        width: 100%;
+        max-width: 350px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      AIR PLUS PERFORMANCE
+    </div>
+  </header>
+
+  <section class="hero">
+
+    <h1>FIND YOUR DREAM CAR</h1>
+
+    <p>
+      Welcome to Air Plus Performance!
+      <br>
+      Quality Used Cars for Every Lifestyle.
+    </p>
+
+    <div class="services">
+      BANK LOAN | LOAN KEDAI | SEWA
+    </div>
+
+    <a
+      class="button"
+      href="https://wa.me/601111073280"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      WHATSAPP BOSST
+    </a>
+
+  </section>
+
+  <section class="section">
+
+    <h2>OUR SERVICES</h2>
+
+    <p>
+      Looking for your next car?
+      We are here to help!
+    </p>
+
+    <div class="service-boxes">
+
+      <div class="service-box">
+        <h3>BANK LOAN</h3>
+        <p>
+          Bank financing options
+          for your car purchase.
+        </p>
+      </div>
+
+      <div class="service-box">
+        <h3>LOAN KEDAI</h3>
+        <p>
+          In-house car financing
+          directly with our dealership.
+        </p>
+      </div>
+
+      <div class="service-box">
+        <h3>SEWA</h3>
+        <p>
+          Car rental options
+          to suit your needs.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+    <p>Air Plus Performance</p>
+    <p>Contact BossT for More Information</p>
+    <p>&copy; 2026 Air Plus Performance</p>
+  </footer>
+
+</body>
+</html>
