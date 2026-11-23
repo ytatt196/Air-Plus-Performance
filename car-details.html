@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Car Details | Air Plus Performance</title>
+
+<style>
+:root {
+  --black: #101010;
+  --dark: #1c1c1c;
+  --gold: #c9a44c;
+  --grey: #aaaaaa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--black);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background: #080808;
+  border-bottom: 2px solid var(--gold);
+  padding: 22px 20px;
+  text-align: center;
+}
+
+.logo img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.navbar a:hover {
+  color: var(--gold);
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 35px 20px 60px;
+}
+
+.back-link {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+h1 {
+  color: var(--gold);
+  margin-top: 25px;
+}
+
+.gallery {
+  position: relative;
+  background: var(--dark);
+  border: 1px solid #44391e;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.gallery img {
+  display: none;
+  width: 100%;
+  height: 480px;
+  object-fit: contain;
+}
+
+.gallery img.active {
+  display: block;
+}
+
+.gallery-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 12px 16px;
+  background: rgba(0,0,0,0.75);
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.prev {
+  left: 12px;
+}
+
+.next {
+  right: 12px;
+}
+
+.counter {
+  text-align: center;
+  color: var(--grey);
+  margin: 15px 0;
+}
+
+.details {
+  background: var(--dark);
+  border: 1px solid #44391e;
+  border-radius: 12px;
+  padding: 25px;
+  margin-top: 25px;
+}
+
+.details h2 {
+  color: var(--gold);
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 14px 0;
+  border-bottom: 1px solid #333;
+}
+
+.detail-row span:first-child {
+  color: var(--grey);
+}
+
+.price {
+  color: var(--gold);
+  font-size: 30px;
+  font-weight: bold;
+  margin: 25px 0;
+}
+
+.button {
+  display: block;
+  background: var(--gold);
+  color: #111;
+  padding: 16px;
+  border-radius: 7px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+}
+
+.no-photo {
+  padding: 90px 20px;
+  text-align: center;
+  color: var(--grey);
+}
+
+footer {
+  padding: 30px;
+  text-align: center;
+  background: #080808;
+  color: var(--grey);
+  border-top: 1px solid #44391e;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    gap: 12px;
+  }
+
+  .navbar a {
+    font-size: 12px;
+  }
+
+  .gallery img {
+    height: 320px;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <img src="air-plus-logo.jpg" alt="Air Plus Performance Logo">
+  </div>
+
+  <nav class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="index.html#cars">OUR CARS</a>
+    <a href="promotion.html">PROMOTION</a>
+    <a href="https://wa.me/60122939186"
+       target="_blank"
+       rel="noopener noreferrer">CONTACT US</a>
+  </nav>
+</header>
+
+<main class="container">
+  <a class="back-link" href="index.html#cars">
+    &#8592; Back to Our Cars
+  </a>
+
+  <h1 id="carTitle">Car Details</h1>
+
+  <div class="gallery" id="gallery"></div>
+  <div class="counter" id="counter"></div>
+
+  <div class="details" id="details"></div>
+</main>
+
+<footer>
+  <p>Air Plus Performance</p>
+  <p>Bank Loan | Loan Kedai | Sewa</p>
+  <p>&copy; 2026 Air Plus Performance</p>
+</footer>
+
+<script src="cars.js"></script>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const carId = params.get("id");
+
+const car = carData.find(item => item.id === carId);
+
+if (!car) {
+  document.getElementById("carTitle").textContent =
+    "Car Not Found";
+
+  document.getElementById("gallery").innerHTML =
+    '<div class="no-photo">This car is not available.</div>';
+} else {
+  document.title =
+    car.brand + " " + car.model + " | Air Plus Performance";
+
+  document.getElementById("carTitle").textContent =
+    car.brand + " " + car.model;
+
+  const gallery = document.getElementById("gallery");
+  const counter = document.getElementById("counter");
+
+  let currentPhoto = 0;
+
+  if (car.photos.length === 0) {
+    gallery.innerHTML =
+      '<div class="no-photo">No Photo Available</div>';
+  } else {
+    const images = [];
+
+    car.photos.forEach((photo, index) => {
+      const img = document.createElement("img");
+      img.src = photo;
+      img.alt = car.brand + " " + car.model;
+      img.className = index === 0 ? "active" : "";
+      gallery.appendChild(img);
+      images.push(img);
+    });
+
+    function showPhoto(direction) {
+      images[currentPhoto].classList.remove("active");
+
+      currentPhoto =
+        (currentPhoto + direction + images.length) %
+        images.length;
+
+      images[currentPhoto].classList.add("active");
+
+      counter.textContent =
+        "Photo " + (currentPhoto + 1) +
+        " of " + images.length;
+    }
+
+    counter.textContent = "Photo 1 of " + images.length;
+
+    if (images.length > 1) {
+      const prev = document.createElement("button");
+      prev.className = "gallery-button prev";
+      prev.textContent = "\u276E";
+      prev.onclick = () => showPhoto(-1);
+
+      const next = document.createElement("button");
+      next.className = "gallery-button next";
+      next.textContent = "\u276F";
+      next.onclick = () => showPhoto(1);
+
+      gallery.append(prev, next);
+    }
+  }
+
+  const details = document.getElementById("details");
+
+  const price = "RM" + car.price.toLocaleString("en-MY");
+
+  const message = encodeURIComponent(
+    "Hi, I am interested in " +
+    car.brand + " " + car.model + " " + car.year
+  );
+
+  details.innerHTML = `
+    <h2>VEHICLE DETAILS</h2>
+    <div class="detail-row">
+      <span>Brand</span><strong>${car.brand}</strong>
+    </div>
+    <div class="detail-row">
+      <span>Model</span><strong>${car.model}</strong>
+    </div>
+    <div class="detail-row">
+      <span>Year</span><strong>${car.year}</strong>
+    </div>
+    <div class="detail-row">
+      <span>Colour</span><strong>${car.color || "Not specified"}</strong>
+    </div>
+
+    <div class="price">${price}</div>
+
+    <a class="button"
+       href="https://wa.me/60122939186?text=${message}"
+       target="_blank"
+       rel="noopener noreferrer">
+       ENQUIRE VIA WHATSAPP
+    </a>
+  `;
+}
+</script>
+
+</body>
+</html>
