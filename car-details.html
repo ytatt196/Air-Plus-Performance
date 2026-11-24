@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Car Details | Air Plus Performance</title>
@@ -174,6 +175,78 @@ footer {
   .gallery img { height: 320px; }
   h1 { font-size: 25px; }
 }
+
+/* Shared CMS-managed logo/header image */
+header {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* ===== AIR PLUS PERFORMANCE FOOTER ===== */
+.company-footer {
+  background: linear-gradient(135deg, #171717, #0b0b0b);
+  border-top: 2px solid #c9a44c;
+  padding: 65px 25px 25px;
+  color: #ffffff;
+  text-align: left;
+}
+.footer-container { max-width: 1250px; margin: 0 auto; }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1.3fr 1fr 1.2fr;
+  gap: 35px;
+}
+.footer-column h2 { color: #c9a44c; font-size: 25px; margin: 0 0 15px; }
+.footer-column h3 { color: #c9a44c; font-size: 15px; margin: 0 0 18px; letter-spacing: 1px; }
+.footer-column p { color: #dddddd; font-size: 14px; line-height: 1.9; margin: 0 0 12px; }
+.footer-column a { color: #eeeeee; text-decoration: none; overflow-wrap: anywhere; }
+.footer-column a:hover { color: #c9a44c; }
+.footer-social { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+.footer-social a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 22px;
+  color: #ffffff;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.footer-social a:hover {
+  color: #ffffff;
+  transform: translateY(-5px) scale(1.07);
+  box-shadow: 0 7px 18px rgba(0, 0, 0, .4);
+}
+.social-facebook { background: #1877f2; }
+.social-instagram { background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); }
+.social-tiktok { background: #080808; border: 1px solid #444444; }
+.social-whatsapp { background: #25d366; }
+.footer-bottom {
+  border-top: 1px solid #444444;
+  margin-top: 45px;
+  padding-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  color: #aaaaaa;
+  font-size: 13px;
+}
+.footer-top { color: #c9a44c; text-decoration: none; font-weight: bold; }
+.footer-top:hover { color: #ffffff; }
+@media (max-width: 950px) {
+  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 35px; }
+}
+@media (max-width: 600px) {
+  .company-footer { padding: 45px 20px 25px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+  .footer-column h2 { font-size: 23px; }
+  .footer-social a { width: 46px; height: 46px; }
+  .footer-bottom { flex-direction: column; text-align: center; margin-top: 35px; }
+}
+
 </style>
 </head>
 
@@ -204,10 +277,39 @@ footer {
   <div class="details" id="details"></div>
 </main>
 
-<footer>
-  <p>Air Plus Performance</p>
-  <p>Bank Loan | Loan Kedai | Sewa</p>
-  <p>&copy; 2026 Air Plus Performance</p>
+<footer class="company-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div class="footer-column">
+        <h2>Air Plus Performance</h2>
+        <p>Bank Loan | Loan Kedai | Sewa</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/profile.php?id=61592018525674" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/airplusperformancesdnbhd/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/@airplus.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="social-tiktok"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="https://wa.me/60122939186" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>ADDRESS</h3>
+        <p>Ground Floor, Lot 2117,<br>Jalan Hokkien, Bandar,<br>98000 Miri, Sarawak</p>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Ground%20Floor%20Lot%202117%20Jalan%20Hokkien%20Miri%20Sarawak" target="_blank" rel="noopener noreferrer">GET DIRECTIONS</a>
+      </div>
+      <div class="footer-column">
+        <h3>OPERATING HOURS</h3>
+        <p>Mon - Sat<br>8:00am - 5:00pm</p>
+      </div>
+      <div class="footer-column">
+        <h3>CONTACT US</h3>
+        <p><a href="mailto:airplus3333@gmail.com">airplus3333@gmail.com</a></p>
+        <p><a href="https://wa.me/60122939186" target="_blank" rel="noopener noreferrer">012-293 9186</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Air Plus Performance Sdn Bhd. All Rights Reserved.</span>
+      <a href="#" class="footer-top">BACK TO TOP ↑</a>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -406,6 +508,24 @@ async function loadCarDetails() {
 }
 
 loadCarDetails();
+</script>
+
+<script>
+// Share the logo/header background with HOME and PROMOTION.
+(async function loadHeaderBackground() {
+  try {
+    const response = await fetch("site-design.json", { cache: "no-cache" });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const design = await response.json();
+    const raw = typeof design?.headerBackgroundImage === "string" ? design.headerBackgroundImage.trim() : "";
+    if (!raw || /^(?:javascript|data):/i.test(raw) || raw.startsWith("//")) return;
+    const image = /^https?:\/\//i.test(raw) ? raw : raw.replace(/^\/+/, "");
+    document.querySelector("header").style.backgroundImage =
+      `linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.72)), url(${JSON.stringify(image)})`;
+  } catch (error) {
+    console.warn("Optional header background unavailable; using default.", error);
+  }
+})();
 </script>
 </body>
 </html>
