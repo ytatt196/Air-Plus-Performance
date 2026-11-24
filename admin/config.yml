@@ -4,6 +4,7 @@ backend:
 
 media_folder: "car-images"
 public_folder: "car-images"
+
 collections:
   - name: "vehicle_management"
     label: "Vehicle Management"
@@ -22,13 +23,42 @@ collections:
             collapsed: true
             summary: "{{fields.brand}} {{fields.model}}"
             fields:
-              - { label: "Car ID", name: "id", widget: "string", hint: "Unique ID, e.g. toyota-vios-2020. Do not change existing IDs." }
-              - { label: "Brand", name: "brand", widget: "string" }
-              - { label: "Model", name: "model", widget: "string" }
-              - { label: "Year", name: "year", widget: "number", value_type: "int" }
-              - { label: "Price (RM)", name: "price", widget: "number", value_type: "int", min: 0 }
-              - { label: "Colour", name: "color", widget: "string", required: false }
-              - { label: "Mileage (km)", name: "mileage", widget: "number", value_type: "int", min: 0, required: false }
+              - label: "Car ID"
+                name: "id"
+                widget: "string"
+                hint: "Unique ID, e.g. toyota-vios-2020. Do not change existing IDs."
+
+              - label: "Brand"
+                name: "brand"
+                widget: "string"
+
+              - label: "Model"
+                name: "model"
+                widget: "string"
+
+              - label: "Year"
+                name: "year"
+                widget: "number"
+                value_type: "int"
+
+              - label: "Price (RM)"
+                name: "price"
+                widget: "number"
+                value_type: "int"
+                min: 0
+
+              - label: "Colour"
+                name: "color"
+                widget: "string"
+                required: false
+
+              - label: "Mileage (km)"
+                name: "mileage"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                required: false
+
               - label: "Transmission"
                 name: "transmission"
                 widget: "select"
@@ -39,14 +69,20 @@ collections:
                   - "CVT"
                   - "DCT"
                   - "Other"
+
               - label: "Car Status"
                 name: "status"
                 widget: "select"
                 options:
-                  - { label: "Available", value: "available" }
-                  - { label: "In Preparation", value: "preparation" }
-                  - { label: "Reserved", value: "reserved" }
-                  - { label: "Sold", value: "sold" }
+                  - label: "Available"
+                    value: "available"
+                  - label: "Reserved"
+                    value: "reserved"
+                  - label: "In Preparation"
+                    value: "preparation"
+                  - label: "Sold"
+                    value: "sold"
+
               - label: "Car Photos"
                 name: "photos"
                 widget: "list"
@@ -55,3 +91,54 @@ collections:
                   label: "Photo"
                   name: "photo"
                   widget: "image"
+
+  - name: "promotion_management"
+    label: "Promotion Management"
+    files:
+      - name: "promotion"
+        label: "Manage Promotion"
+        file: "promotion.json"
+        format: "json"
+        editor:
+          preview: false
+        fields:
+          - label: "Hero Title"
+            name: "heroTitle"
+            widget: "string"
+
+          - label: "Hero Subtitle"
+            name: "heroSubtitle"
+            widget: "text"
+
+          - label: "Section Background Image"
+            name: "sectionBackgroundImage"
+            widget: "image"
+            required: false
+
+          - label: "Promotion List"
+            name: "promotions"
+            widget: "list"
+            label_singular: "Promotion"
+            collapsed: true
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Promotion Title"
+                name: "title"
+                widget: "string"
+
+              - label: "Promotion Description"
+                name: "description"
+                widget: "text"
+
+              - label: "Promotion Image"
+                name: "image"
+                widget: "image"
+                required: false
+
+          - label: "Promotion Note"
+            name: "note"
+            widget: "text"
+
+          - label: "WhatsApp Button Text"
+            name: "whatsappButtonText"
+            widget: "string"
