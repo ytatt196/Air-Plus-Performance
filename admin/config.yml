@@ -1,12 +1,9 @@
-
-
 backend:
   name: turbo-github
   turbo_site_id: 0a3b6d92-313a-4da4-b9b2-535f82913bd2
 
 media_folder: "car-images"
 public_folder: "car-images"
-
 collections:
   - name: "vehicle_management"
     label: "Vehicle Management"
@@ -47,8 +44,9 @@ collections:
                 widget: "select"
                 options:
                   - { label: "Available", value: "available" }
-                  - { label: "Sold", value: "sold" }
+                  - { label: "In Preparation", value: "preparation" }
                   - { label: "Reserved", value: "reserved" }
+                  - { label: "Sold", value: "sold" }
               - label: "Car Photos"
                 name: "photos"
                 widget: "list"
