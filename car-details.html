@@ -1,10 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Car Details | Air Plus Performance</title>
 
 <style>
@@ -15,9 +13,7 @@
   --grey: #aaaaaa;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -54,9 +50,7 @@ header {
   font-size: 14px;
 }
 
-.navbar a:hover {
-  color: var(--gold);
-}
+.navbar a:hover { color: var(--gold); }
 
 .container {
   max-width: 1000px;
@@ -89,16 +83,14 @@ h1 {
   object-fit: contain;
 }
 
-.gallery img.active {
-  display: block;
-}
+.gallery img.active { display: block; }
 
 .gallery-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   padding: 12px 16px;
-  background: rgba(0,0,0,0.75);
+  background: rgba(0, 0, 0, 0.75);
   color: var(--gold);
   border: 1px solid var(--gold);
   border-radius: 6px;
@@ -106,13 +98,8 @@ h1 {
   font-size: 22px;
 }
 
-.prev {
-  left: 12px;
-}
-
-.next {
-  right: 12px;
-}
+.prev { left: 12px; }
+.next { right: 12px; }
 
 .counter {
   text-align: center;
@@ -128,9 +115,7 @@ h1 {
   margin-top: 25px;
 }
 
-.details h2 {
-  color: var(--gold);
-}
+.details h2 { color: var(--gold); }
 
 .detail-row {
   display: flex;
@@ -140,9 +125,8 @@ h1 {
   border-bottom: 1px solid #333;
 }
 
-.detail-row span:first-child {
-  color: var(--grey);
-}
+.detail-row span:first-child { color: var(--grey); }
+.detail-row strong { text-align: right; overflow-wrap: anywhere; }
 
 .price {
   color: var(--gold);
@@ -177,27 +161,15 @@ footer {
 }
 
 @media (max-width: 600px) {
-  .navbar {
-    gap: 12px;
-  }
-
-  .navbar a {
-    font-size: 12px;
-  }
-
-  .gallery img {
-    height: 320px;
-  }
-
-  h1 {
-    font-size: 25px;
-  }
+  .navbar { gap: 12px; }
+  .navbar a { font-size: 12px; }
+  .gallery img { height: 320px; }
+  h1 { font-size: 25px; }
 }
 </style>
 </head>
 
 <body>
-
 <header>
   <div class="logo">
     <img src="air-plus-logo.jpg" alt="Air Plus Performance Logo">
@@ -219,10 +191,8 @@ footer {
   </a>
 
   <h1 id="carTitle">Car Details</h1>
-
   <div class="gallery" id="gallery"></div>
   <div class="counter" id="counter"></div>
-
   <div class="details" id="details"></div>
 </main>
 
@@ -233,112 +203,149 @@ footer {
 </footer>
 
 <script src="cars.js"></script>
-
 <script>
 const params = new URLSearchParams(window.location.search);
 const carId = params.get("id");
+const cars = (typeof carData !== "undefined" && Array.isArray(carData))
+  ? carData
+  : [];
+const car = cars.find(item => item && item.id === carId);
 
-const car = carData.find(item => item.id === carId);
+const titleElement = document.getElementById("carTitle");
+const gallery = document.getElementById("gallery");
+const counter = document.getElementById("counter");
+const details = document.getElementById("details");
+
+function showGalleryMessage(message) {
+  gallery.replaceChildren();
+  const notice = document.createElement("div");
+  notice.className = "no-photo";
+  notice.textContent = message;
+  gallery.appendChild(notice);
+  counter.textContent = "";
+}
+
+function addDetailRow(label, value) {
+  const row = document.createElement("div");
+  row.className = "detail-row";
+  const name = document.createElement("span");
+  name.textContent = label;
+  const result = document.createElement("strong");
+  result.textContent = String(value);
+  row.append(name, result);
+  details.appendChild(row);
+}
 
 if (!car) {
-  document.getElementById("carTitle").textContent =
-    "Car Not Found";
-
-  document.getElementById("gallery").innerHTML =
-    '<div class="no-photo">This car is not available.</div>';
+  titleElement.textContent = "Car Not Found";
+  showGalleryMessage("This car is not available.");
 } else {
-  document.title =
-    car.brand + " " + car.model + " | Air Plus Performance";
+  const fullName = `${car.brand || ""} ${car.model || ""}`.trim();
+  document.title = `${fullName} | Air Plus Performance`;
+  titleElement.textContent = fullName;
 
-  document.getElementById("carTitle").textContent =
-    car.brand + " " + car.model;
+  const photos = Array.isArray(car.photos)
+    ? car.photos.filter(photo => typeof photo === "string" && photo.trim())
+    : [];
 
-  const gallery = document.getElementById("gallery");
-  const counter = document.getElementById("counter");
-
-  let currentPhoto = 0;
-
-  if (car.photos.length === 0) {
-    gallery.innerHTML =
-      '<div class="no-photo">No Photo Available</div>';
+  if (photos.length === 0) {
+    showGalleryMessage("No Photo Available");
   } else {
     const images = [];
+    let currentPhoto = 0;
 
-    car.photos.forEach((photo, index) => {
+    function showPhoto(index) {
+      images.forEach((img, imageIndex) => {
+        img.classList.toggle("active", imageIndex === index);
+      });
+      currentPhoto = index;
+      counter.textContent = `Photo ${currentPhoto + 1} of ${images.length}`;
+    }
+
+    function updateGallery() {
+      if (images.length === 0) {
+        showGalleryMessage("No Photo Available");
+        return;
+      }
+      showPhoto(Math.min(currentPhoto, images.length - 1));
+      prev.hidden = images.length <= 1;
+      next.hidden = images.length <= 1;
+    }
+
+    const prev = document.createElement("button");
+    prev.type = "button";
+    prev.className = "gallery-button prev";
+    prev.textContent = "❮";
+    prev.setAttribute("aria-label", "Previous photo");
+    prev.onclick = () => showPhoto((currentPhoto - 1 + images.length) % images.length);
+
+    const next = document.createElement("button");
+    next.type = "button";
+    next.className = "gallery-button next";
+    next.textContent = "❯";
+    next.setAttribute("aria-label", "Next photo");
+    next.onclick = () => showPhoto((currentPhoto + 1) % images.length);
+
+    photos.forEach(photo => {
       const img = document.createElement("img");
       img.src = photo;
-      img.alt = car.brand + " " + car.model;
-      img.className = index === 0 ? "active" : "";
-      gallery.appendChild(img);
+      img.alt = fullName;
+      img.onerror = () => {
+        const index = images.indexOf(img);
+        if (index !== -1) {
+          images.splice(index, 1);
+          img.remove();
+          currentPhoto = 0;
+          updateGallery();
+        }
+      };
       images.push(img);
+      gallery.appendChild(img);
     });
 
-    function showPhoto(direction) {
-      images[currentPhoto].classList.remove("active");
-
-      currentPhoto =
-        (currentPhoto + direction + images.length) %
-        images.length;
-
-      images[currentPhoto].classList.add("active");
-
-      counter.textContent =
-        "Photo " + (currentPhoto + 1) +
-        " of " + images.length;
-    }
-
-    counter.textContent = "Photo 1 of " + images.length;
-
-    if (images.length > 1) {
-      const prev = document.createElement("button");
-      prev.className = "gallery-button prev";
-      prev.textContent = "\u276E";
-      prev.onclick = () => showPhoto(-1);
-
-      const next = document.createElement("button");
-      next.className = "gallery-button next";
-      next.textContent = "\u276F";
-      next.onclick = () => showPhoto(1);
-
-      gallery.append(prev, next);
-    }
+    gallery.append(prev, next);
+    updateGallery();
   }
 
-  const details = document.getElementById("details");
+  const heading = document.createElement("h2");
+  heading.textContent = "VEHICLE DETAILS";
+  details.appendChild(heading);
 
-  const price = "RM" + car.price.toLocaleString("en-MY");
+  addDetailRow("Brand", car.brand || "Not specified");
+  addDetailRow("Model", car.model || "Not specified");
+  addDetailRow("Year", car.year ?? "Not specified");
+  addDetailRow("Colour", car.color || "Not specified");
+
+  // Optional values appear only when actually provided.
+  if (car.mileage !== null && car.mileage !== undefined && car.mileage !== "") {
+    const mileage = Number(car.mileage);
+    if (Number.isFinite(mileage) && mileage >= 0) {
+      addDetailRow("Mileage", `${mileage.toLocaleString("en-MY")} km`);
+    }
+  }
+  if (typeof car.transmission === "string" && car.transmission.trim()) {
+    addDetailRow("Transmission", car.transmission.trim());
+  }
+
+  const priceElement = document.createElement("div");
+  priceElement.className = "price";
+  const priceValue = Number(car.price);
+  priceElement.textContent = Number.isFinite(priceValue) && priceValue >= 0
+    ? `RM${priceValue.toLocaleString("en-MY")}`
+    : "Price on request";
+  details.appendChild(priceElement);
 
   const message = encodeURIComponent(
-    "Hi, I am interested in " +
-    car.brand + " " + car.model + " " + car.year
+    `Hi, I am interested in ${fullName} ${car.year || ""}`.trim()
   );
-
-  details.innerHTML = `
-    <h2>VEHICLE DETAILS</h2>
-    <div class="detail-row">
-      <span>Brand</span><strong>${car.brand}</strong>
-    </div>
-    <div class="detail-row">
-      <span>Model</span><strong>${car.model}</strong>
-    </div>
-    <div class="detail-row">
-      <span>Year</span><strong>${car.year}</strong>
-    </div>
-    <div class="detail-row">
-      <span>Colour</span><strong>${car.color || "Not specified"}</strong>
-    </div>
-
-    <div class="price">${price}</div>
-
-    <a class="button"
-       href="https://wa.me/60122939186?text=${message}"
-       target="_blank"
-       rel="noopener noreferrer">
-       ENQUIRE VIA WHATSAPP
-    </a>
-  `;
+  const enquiry = document.createElement("a");
+  enquiry.className = "button";
+  enquiry.href = `https://wa.me/60122939186?text=${message}`;
+  enquiry.target = "_blank";
+  enquiry.rel = "noopener noreferrer";
+  enquiry.textContent = "ENQUIRE VIA WHATSAPP";
+  details.appendChild(enquiry);
 }
 </script>
-
 </body>
 </html>
