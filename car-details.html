@@ -128,6 +128,14 @@ h1 {
 .detail-row span:first-child { color: var(--grey); }
 .detail-row strong { text-align: right; overflow-wrap: anywhere; }
 
+/* Status appears only inside Vehicle Details. */
+.vehicle-status { font-weight: bold; }
+.status-available { color: #c9a44c; }
+.status-preparation { color: #f0c66c; }
+.status-reserved { color: #ffb86b; }
+.status-sold { color: #f28b82; }
+
+
 .price {
   color: var(--gold);
   font-size: 30px;
@@ -316,6 +324,25 @@ function renderCar(car) {
   addDetailRow("Year", car.year ?? "Not specified");
   addDetailRow("Colour", car.color || "Not specified");
 
+  // Vehicle status is shown only on this detail page, not on the homepage.
+  // Unknown or missing statuses should not be advertised as available.
+  const statuses = {
+    available: "AVAILABLE",
+    preparation: "IN PREPARATION",
+    reserved: "RESERVED",
+    sold: "SOLD"
+  };
+  const statusKey = typeof car.status === "string"
+    ? car.status.trim().toLowerCase()
+    : "";
+  const statusLabel = statuses[statusKey] || "Not specified";
+  addDetailRow("Status", statusLabel);
+  const statusValue = details.lastElementChild.querySelector("strong");
+  if (statuses[statusKey]) {
+    statusValue.classList.add("vehicle-status", `status-${statusKey}`);
+  }
+
+
   // Optional details are only shown when they have values.
   if (car.mileage !== null && car.mileage !== undefined && car.mileage !== "") {
     const mileage = Number(car.mileage);
@@ -336,15 +363,18 @@ function renderCar(car) {
     : "Price on request";
   details.appendChild(priceElement);
 
-  const message = encodeURIComponent(
-    `Hi, I am interested in ${fullName} ${car.year || ""}`.trim()
-  );
+  const enquiryText = statusKey === "sold"
+    ? `Hi, I saw ${fullName} ${car.year || ""} is sold. Do you have similar cars available?`
+    : `Hi, I am interested in ${fullName} ${car.year || ""}`;
+  const message = encodeURIComponent(enquiryText.trim());
   const enquiry = document.createElement("a");
   enquiry.className = "button";
   enquiry.href = `https://wa.me/60122939186?text=${message}`;
   enquiry.target = "_blank";
   enquiry.rel = "noopener noreferrer";
-  enquiry.textContent = "ENQUIRE VIA WHATSAPP";
+  enquiry.textContent = statusKey === "sold"
+    ? "ASK ABOUT SIMILAR CARS"
+    : "ENQUIRE VIA WHATSAPP";
   details.appendChild(enquiry);
 }
 
