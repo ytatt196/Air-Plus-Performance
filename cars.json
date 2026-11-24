@@ -11,7 +11,7 @@
       "price": 58800,
       "model": "Yaris 1.5E",
       "mileage": null,
-      "status": "available",
+      "status": "preparation",
       "id": "toyota-yaris",
       "year": 2022
     },
@@ -38,7 +38,7 @@
       "price": 38999,
       "model": "Perdana 2.0",
       "mileage": null,
-      "status": "available",
+      "status": "sold",
       "id": "proton-perdana",
       "year": 2018
     },
