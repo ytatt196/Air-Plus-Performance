@@ -15,9 +15,7 @@
   --grey: #aaaaaa;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -33,6 +31,7 @@ header {
   text-align: center;
 }
 
+
 .logo {
   display: flex;
   justify-content: center;
@@ -46,7 +45,7 @@ header {
   display: block;
 }
 
-.navbar {
+  .navbar {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,12 +79,8 @@ header {
 .hero {
   padding: 70px 20px;
   text-align: center;
-  background: linear-gradient(
-    135deg,
-    #111111,
-    #30291c,
-    #111111
-  );
+  background: linear-gradient(135deg,
+    #111111, #30291c, #111111);
 }
 
 .hero h1 {
@@ -104,6 +99,7 @@ header {
   font-weight: bold;
 }
 
+
 .button {
   display: inline-block;
   padding: 13px 22px;
@@ -119,6 +115,7 @@ header {
   background: #e4c46d;
   transform: translateY(-2px);
 }
+
 
 .section {
   padding: 55px 20px;
@@ -195,23 +192,25 @@ header {
   margin: 25px 0;
 }
 
+
 .car-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 25px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
 }
 
 @media (max-width: 900px) {
-  .car-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+    .car-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 600px) {
-  .car-grid {
-    grid-template-columns: 1fr;
-  }
+    .car-grid {
+        grid-template-columns: 1fr;
+    }
 }
+
 
 .car-card {
   background: var(--dark);
@@ -229,6 +228,7 @@ header {
   box-shadow: 0 8px 25px rgba(201, 164, 76, 0.15);
 }
 
+
 .car-photo {
   height: 230px;
   background: #252525;
@@ -238,12 +238,14 @@ header {
   font-size: 70px;
 }
 
+  
 .car-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
+
 
 .car-info {
   padding: 20px;
@@ -251,7 +253,6 @@ header {
   flex-direction: column;
   flex: 1;
 }
-
 .car-info h3 {
   margin: 0 0 10px;
 }
@@ -271,7 +272,6 @@ header {
   margin-top: auto;
   text-align: center;
 }
-
 footer {
   padding: 30px;
   text-align: center;
@@ -280,41 +280,33 @@ footer {
   border-top: 1px solid #44391e;
 }
 
-@media (max-width: 600px) {
-  .hero h1 {
-    font-size: 30px;
-  }
+@media(max-width:600px) {
+  .hero h1 { font-size: 30px; }
 }
 </style>
 </head>
 
 <body>
 
+
 <header id="home">
   <div class="logo">
-    <img
-      src="air-plus-logo.jpg"
-      alt="Air Plus Performance Logo"
-    >
-  </div>
+  <img src="air-plus-logo.jpg" alt="Air Plus Performance Logo">
+</div>
 
   <nav class="navbar">
     <a href="index.html">HOME</a>
     <a href="index.html#cars">OUR CARS</a>
     <a href="promotion.html">PROMOTION</a>
-    <a
-      href="https://wa.me/60122939186"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      CONTACT US
-    </a>
+    <a href="https://wa.me/60122939186"
+       target="_blank"
+       rel="noopener noreferrer">CONTACT US</a>
   </nav>
 </header>
 
+
 <section class="hero">
   <h1>FIND YOUR DREAM CAR</h1>
-
   <p>
     Welcome to Air Plus Performance!
     <br>
@@ -325,60 +317,57 @@ footer {
     BANK LOAN | LOAN KEDAI | SEWA
   </div>
 
-  <a
-    class="button"
-    href="https://wa.me/60122939186"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
+  <a class="button"
+     href="https://wa.me/60122939186"
+     target="_blank"
+     rel="noopener noreferrer">
     WHATSAPP US
   </a>
 </section>
+
 
 <section class="section" id="cars">
 
   <h2>OUR CARS</h2>
 
-  <div class="car-filters">
 
-    <select id="brandFilter">
-      <option value="">All Brands</option>
-    </select>
+<div class="car-filters">
 
-    <select id="modelFilter">
-      <option value="">All Models</option>
-    </select>
+  <select id="brandFilter">
+    <option value="">All Brands</option>
+  </select>
 
-    <select id="priceFilter">
-      <option value="">Any Price</option>
-      <option value="20000">Up to RM20,000</option>
-      <option value="30000">Up to RM30,000</option>
-      <option value="40000">Up to RM40,000</option>
-      <option value="50000">Up to RM50,000</option>
-      <option value="60000">Up to RM60,000</option>
-      <option value="80000">Up to RM80,000</option>
-      <option value="100000">Up to RM100,000</option>
-      <option value="150000">Up to RM150,000</option>
-      <option value="200000">Up to RM200,000</option>
-    </select>
+  <select id="modelFilter">
+    <option value="">All Models</option>
+  </select>
 
-    <button
-      type="button"
-      class="button"
-      onclick="searchCars()"
-    >
-      SEARCH CARS
-    </button>
+  <select id="priceFilter">
+    <option value="">Any Price</option>
+    <option value="20000">Up to RM20,000</option>
+    <option value="30000">Up to RM30,000</option>
+    <option value="40000">Up to RM40,000</option>
+    <option value="50000">Up to RM50,000</option>
+    <option value="60000">Up to RM60,000</option>
+    <option value="80000">Up to RM80,000</option>
+    <option value="100000">Up to RM100,000</option>
+    <option value="150000">Up to RM150,000</option>
+    <option value="200000">Up to RM200,000</option>
+  </select>
 
-    <button
-      type="button"
-      class="button reset-button"
-      onclick="resetFilters()"
-    >
-      RESET FILTERS
-    </button>
+  <button type="button"
+          class="button"
+          onclick="searchCars()">
+    SEARCH CARS
+  </button>
+  
+<button type="button"
+        class="button reset-button"
+        onclick="resetFilters()">
+  RESET FILTERS
+</button>
 
-  </div>
+
+</div>
 
   <input
     type="text"
@@ -390,10 +379,8 @@ footer {
 
   <div class="car-grid" id="carGrid"></div>
 
-  <p
-    id="noResults"
-    style="display:none;text-align:center;color:#aaa"
-  >
+  <p id="noResults"
+     style="display:none;text-align:center;color:#aaa">
     No cars found.
   </p>
 
@@ -405,10 +392,9 @@ footer {
   <p>&copy; 2026 Air Plus Performance</p>
 </footer>
 
-<script src="cars.js"></script>
 
 <script>
-// Shared car data
+// Vehicle listings are loaded from cars.json (the future CMS data source).
 const carGrid = document.getElementById("carGrid");
 const brandFilter = document.getElementById("brandFilter");
 const modelFilter = document.getElementById("modelFilter");
@@ -416,15 +402,11 @@ const priceFilter = document.getElementById("priceFilter");
 const searchInput = document.getElementById("search");
 const noResults = document.getElementById("noResults");
 
-const cars = (
-  typeof carData !== "undefined" &&
-  Array.isArray(carData)
-) ? carData : [];
+let cars = [];
 
-// Generate car cards
+// Generate a card for each vehicle using the shared data file.
 function renderCars() {
   carGrid.replaceChildren();
-
   const fragment = document.createDocumentFragment();
 
   cars.forEach(car => {
@@ -434,20 +416,14 @@ function renderCars() {
     const photo = document.createElement("div");
     photo.className = "car-photo";
 
-    if (
-      Array.isArray(car.photos) &&
-      car.photos.length > 0 &&
-      car.photos[0]
-    ) {
+    if (Array.isArray(car.photos) && car.photos.length > 0 && car.photos[0]) {
       const img = document.createElement("img");
       img.src = car.photos[0];
       img.alt = `${car.brand} ${car.model} ${car.year}`;
       img.loading = "lazy";
-
       img.onerror = () => {
         photo.textContent = "🚗";
       };
-
       photo.appendChild(img);
     } else {
       photo.textContent = "🚗";
@@ -465,13 +441,11 @@ function renderCars() {
 
     const price = document.createElement("div");
     price.className = "car-price";
-    price.textContent =
-      `RM${Number(car.price).toLocaleString("en-MY")}`;
+    price.textContent = `RM${Number(car.price).toLocaleString("en-MY")}`;
 
     const link = document.createElement("a");
     link.className = "button";
-    link.href =
-      `car-details.html?id=${encodeURIComponent(car.id)}`;
+    link.href = `car-details.html?id=${encodeURIComponent(car.id)}`;
     link.textContent = "VIEW DETAILS";
 
     info.append(name, year, price, link);
@@ -482,17 +456,12 @@ function renderCars() {
   carGrid.appendChild(fragment);
 }
 
-// Brands from actual car data
+// Show only brands and models that exist in current vehicle data.
 function populateBrands() {
-  const brands = [
-    ...new Set(
-      cars.map(car => car.brand).filter(Boolean)
-    )
-  ].sort((a, b) => a.localeCompare(b));
+  const brands = [...new Set(cars.map(car => car.brand).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b));
 
-  brandFilter.innerHTML =
-    '<option value="">All Brands</option>';
-
+  brandFilter.innerHTML = '<option value="">All Brands</option>';
   brands.forEach(brand => {
     const option = document.createElement("option");
     option.value = brand;
@@ -501,73 +470,50 @@ function populateBrands() {
   });
 }
 
-// Models based on selected brand
 function updateModels() {
   const brand = brandFilter.value;
+  const models = [...new Set(cars
+    .filter(car => !brand || car.brand === brand)
+    .map(car => car.model)
+    .filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b));
 
-  const models = [
-    ...new Set(
-      cars
-        .filter(car => !brand || car.brand === brand)
-        .map(car => car.model)
-        .filter(Boolean)
-    )
-  ].sort((a, b) => a.localeCompare(b));
-
-  modelFilter.innerHTML =
-    '<option value="">All Models</option>';
-
+  modelFilter.innerHTML = '<option value="">All Models</option>';
   models.forEach(model => {
     const option = document.createElement("option");
     option.value = model;
     option.textContent = model;
     modelFilter.appendChild(option);
   });
-
   modelFilter.disabled = !brand;
   searchCars();
 }
 
-// Search and filter
 function searchCars() {
-  const query = searchInput.value
-    .toLowerCase()
-    .trim();
-
+  const query = searchInput.value.toLowerCase().trim();
   const brand = brandFilter.value;
   const model = modelFilter.value;
   const maxPrice = Number(priceFilter.value);
-
   const cards = carGrid.querySelectorAll(".car-card");
   let visible = 0;
 
   cars.forEach((car, index) => {
-    const name =
-      `${car.brand} ${car.model}`.toLowerCase();
-
-    const match =
-      name.includes(query) &&
-      (!brand || car.brand === brand) &&
-      (!model || car.model === model) &&
-      (!maxPrice || Number(car.price) <= maxPrice);
+    const name = `${car.brand} ${car.model}`.toLowerCase();
+    const match = name.includes(query)
+      && (!brand || car.brand === brand)
+      && (!model || car.model === model)
+      && (!maxPrice || Number(car.price) <= maxPrice);
 
     cards[index].style.display = match ? "" : "none";
-
-    if (match) {
-      visible++;
-    }
+    if (match) visible++;
   });
 
-  noResults.style.display =
-    visible === 0 ? "block" : "none";
-
-  noResults.textContent =
-    cars.length === 0
-      ? "No cars available. Please check cars.js."
-      : "No cars found.";
+  noResults.style.display = visible === 0 ? "block" : "none";
+  noResults.textContent = cars.length === 0
+    ? "No cars available."
+    : "No cars found.";
 }
 
-// Reset filters
 function resetFilters() {
   brandFilter.value = "";
   priceFilter.value = "";
@@ -575,17 +521,38 @@ function resetFilters() {
   updateModels();
 }
 
-// Events
 brandFilter.addEventListener("change", updateModels);
 modelFilter.addEventListener("change", searchCars);
 priceFilter.addEventListener("change", searchCars);
 
-// Initial loading
-renderCars();
-populateBrands();
-updateModels();
+// Load the JSON before rendering any cards or filling filter options.
+async function loadCars() {
+  try {
+    const response = await fetch("cars.json", { cache: "no-cache" });
+    if (!response.ok) {
+      throw new Error(`Failed to load cars.json (HTTP ${response.status})`);
+    }
 
+    const data = await response.json();
+    if (!data || !Array.isArray(data.cars)) {
+      throw new Error("cars.json must contain a cars array");
+    }
+
+    cars = data.cars;
+    renderCars();
+    populateBrands();
+    updateModels();
+  } catch (error) {
+    console.error("Unable to load vehicle data:", error);
+    carGrid.replaceChildren();
+    noResults.textContent = "Unable to load cars right now. Please try again later.";
+    noResults.style.display = "block";
+  }
+}
+
+loadCars();
 </script>
+
 
 </body>
 </html>
