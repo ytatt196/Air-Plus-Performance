@@ -1,56 +1,55 @@
-
 {
   "cars": [
     {
-      "id": "toyota-yaris",
-      "brand": "Toyota",
-      "model": "Yaris 1.5E",
-      "year": 2022,
-      "price": 58800,
-      "color": "Red",
-      "mileage": null,
-      "transmission": "",
-      "status": "available",
       "photos": [
         "Front Toyota yaris red.jpg",
         "Back Toyota Yaris red.jpg"
-      ]
+      ],
+      "color": "Red",
+      "transmission": "",
+      "brand": "Toyota",
+      "price": 58800,
+      "model": "Yaris 1.5E",
+      "mileage": null,
+      "status": "available",
+      "id": "toyota-yaris",
+      "year": 2022
     },
     {
-      "id": "perodua-ativa",
+      "photos": [],
+      "color": "",
+      "transmission": "",
       "brand": "Perodua",
-      "model": "Ativa AV 1.0T",
-      "year": 2021,
       "price": 48800,
-      "color": "",
+      "model": "Ativa AV 1.0T",
       "mileage": null,
-      "transmission": "",
-      "status": "available",
-      "photos": []
+      "status": "reserved",
+      "id": "perodua-ativa",
+      "year": 2021
     },
     {
-      "id": "proton-perdana",
+      "photos": [],
+      "color": "",
+      "transmission": "",
       "brand": "Proton",
-      "model": "Perdana 2.4",
-      "year": 2018,
       "price": 43999,
-      "color": "",
+      "model": "Perdana 2.4",
       "mileage": null,
-      "transmission": "",
       "status": "available",
-      "photos": []
+      "id": "proton-perdana",
+      "year": 2018
     },
     {
-      "id": "proton-saga",
-      "brand": "Proton",
-      "model": "Saga FLX 1.3",
-      "year": 2015,
-      "price": 13800,
+      "photos": [],
       "color": "",
-      "mileage": null,
       "transmission": "",
+      "brand": "Proton",
+      "price": 13800,
+      "model": "Saga FLX 1.3",
+      "mileage": null,
       "status": "available",
-      "photos": []
+      "id": "proton-saga",
+      "year": 2015
     }
   ]
 }
