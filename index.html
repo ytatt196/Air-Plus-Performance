@@ -15,7 +15,9 @@
   --grey: #aaaaaa;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -31,7 +33,6 @@ header {
   text-align: center;
 }
 
-
 .logo {
   display: flex;
   justify-content: center;
@@ -45,7 +46,7 @@ header {
   display: block;
 }
 
-  .navbar {
+.navbar {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,8 +80,12 @@ header {
 .hero {
   padding: 70px 20px;
   text-align: center;
-  background: linear-gradient(135deg,
-    #111111, #30291c, #111111);
+  background: linear-gradient(
+    135deg,
+    #111111,
+    #30291c,
+    #111111
+  );
 }
 
 .hero h1 {
@@ -99,7 +104,6 @@ header {
   font-weight: bold;
 }
 
-
 .button {
   display: inline-block;
   padding: 13px 22px;
@@ -115,7 +119,6 @@ header {
   background: #e4c46d;
   transform: translateY(-2px);
 }
-
 
 .section {
   padding: 55px 20px;
@@ -192,25 +195,23 @@ header {
   margin: 25px 0;
 }
 
-
 .car-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 25px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
 }
 
 @media (max-width: 900px) {
-    .car-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  .car-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 600px) {
-    .car-grid {
-        grid-template-columns: 1fr;
-    }
+  .car-grid {
+    grid-template-columns: 1fr;
+  }
 }
-
 
 .car-card {
   background: var(--dark);
@@ -228,7 +229,6 @@ header {
   box-shadow: 0 8px 25px rgba(201, 164, 76, 0.15);
 }
 
-
 .car-photo {
   height: 230px;
   background: #252525;
@@ -238,14 +238,12 @@ header {
   font-size: 70px;
 }
 
-  
 .car-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
-
 
 .car-info {
   padding: 20px;
@@ -253,6 +251,7 @@ header {
   flex-direction: column;
   flex: 1;
 }
+
 .car-info h3 {
   margin: 0 0 10px;
 }
@@ -272,6 +271,7 @@ header {
   margin-top: auto;
   text-align: center;
 }
+
 footer {
   padding: 30px;
   text-align: center;
@@ -280,34 +280,41 @@ footer {
   border-top: 1px solid #44391e;
 }
 
-@media(max-width:600px) {
-  .logo { font-size: 19px; }
-  .hero h1 { font-size: 30px; }
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 30px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-
 <header id="home">
   <div class="logo">
-  <img src="air-plus-logo.jpg" alt="Air Plus Performance Logo">
-</div>
+    <img
+      src="air-plus-logo.jpg"
+      alt="Air Plus Performance Logo"
+    >
+  </div>
 
   <nav class="navbar">
     <a href="index.html">HOME</a>
     <a href="index.html#cars">OUR CARS</a>
     <a href="promotion.html">PROMOTION</a>
-    <a href="https://wa.me/60122939186"
-       target="_blank"
-       rel="noopener noreferrer">CONTACT US</a>
+    <a
+      href="https://wa.me/60122939186"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      CONTACT US
+    </a>
   </nav>
 </header>
 
-
 <section class="hero">
   <h1>FIND YOUR DREAM CAR</h1>
+
   <p>
     Welcome to Air Plus Performance!
     <br>
@@ -318,57 +325,60 @@ footer {
     BANK LOAN | LOAN KEDAI | SEWA
   </div>
 
-  <a class="button"
-     href="https://wa.me/60122939186"
-     target="_blank"
-     rel="noopener noreferrer">
+  <a
+    class="button"
+    href="https://wa.me/60122939186"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
     WHATSAPP US
   </a>
 </section>
-
 
 <section class="section" id="cars">
 
   <h2>OUR CARS</h2>
 
+  <div class="car-filters">
 
-<div class="car-filters">
+    <select id="brandFilter">
+      <option value="">All Brands</option>
+    </select>
 
-  <select id="brandFilter">
-    <option value="">All Brands</option>
-  </select>
+    <select id="modelFilter">
+      <option value="">All Models</option>
+    </select>
 
-  <select id="modelFilter">
-    <option value="">All Models</option>
-  </select>
+    <select id="priceFilter">
+      <option value="">Any Price</option>
+      <option value="20000">Up to RM20,000</option>
+      <option value="30000">Up to RM30,000</option>
+      <option value="40000">Up to RM40,000</option>
+      <option value="50000">Up to RM50,000</option>
+      <option value="60000">Up to RM60,000</option>
+      <option value="80000">Up to RM80,000</option>
+      <option value="100000">Up to RM100,000</option>
+      <option value="150000">Up to RM150,000</option>
+      <option value="200000">Up to RM200,000</option>
+    </select>
 
-  <select id="priceFilter">
-    <option value="">Any Price</option>
-    <option value="20000">Below RM20,000</option>
-    <option value="30000">Below RM30,000</option>
-    <option value="40000">Below RM40,000</option>
-    <option value="50000">Below RM50,000</option>
-    <option value="60000">Below RM60,000</option>
-    <option value="80000">Below RM80,000</option>
-    <option value="100000">Below RM100,000</option>
-    <option value="150000">Below RM150,000</option>
-    <option value="200000">Below RM200,000</option>
-  </select>
+    <button
+      type="button"
+      class="button"
+      onclick="searchCars()"
+    >
+      SEARCH CARS
+    </button>
 
-  <button type="button"
-          class="button"
-          onclick="searchCars()">
-    SEARCH CARS
-  </button>
-  
-<button type="button"
-        class="button reset-button"
-        onclick="resetFilters()">
-  RESET FILTERS
-</button>
+    <button
+      type="button"
+      class="button reset-button"
+      onclick="resetFilters()"
+    >
+      RESET FILTERS
+    </button>
 
-
-</div>
+  </div>
 
   <input
     type="text"
@@ -378,72 +388,12 @@ footer {
     oninput="searchCars()"
   >
 
-  <div class="car-grid" id="carGrid">
+  <div class="car-grid" id="carGrid"></div>
 
-    <div class="car-card">
-      
-<div class="car-photo">
-  <img
-    src="Front Toyota yaris red.jpg"
-    alt="Toyota Yaris 1.5E 2022"
+  <p
+    id="noResults"
+    style="display:none;text-align:center;color:#aaa"
   >
-</div>
-
-      <div class="car-info">
-        <h3>Toyota Yaris 1.5E</h3>
-        <div class="car-year">Year: 2022</div>
-        <div class="car-price">RM58,800</div>
-       <a class="button" href="car-details.html?id=toyota-yaris">
-  VIEW DETAILS
-</a>
-</div>
-      </div>
-
-    <div class="car-card">
-      <div class="car-photo">🚙</div>
-      <div class="car-info">
-        <h3>Perodua Ativa AV 1.0T</h3>
-        <div class="car-year">Year: 2021</div>
-        <div class="car-price">RM48,800</div>
-        
-<a class="button" href="car-details.html?id=perodua-ativa">
-  VIEW DETAILS
-</a>
-
-      </div>
-    </div>
-
-    <div class="car-card">
-      <div class="car-photo">🚘</div>
-      <div class="car-info">
-        <h3>Proton Perdana 2.4</h3>
-        <div class="car-year">Year: 2018</div>
-        <div class="car-price">RM43,999</div>
-       
-<a class="button" href="car-details.html?id=proton-perdana">
-  VIEW DETAILS
-</a>
-
-      </div>
-    </div>
-
-    <div class="car-card">
-      <div class="car-photo">🚗</div>
-      <div class="car-info">
-        <h3>Proton Saga FLX 1.3</h3>
-        <div class="car-year">Year: 2015</div>
-        <div class="car-price">RM13,800</div>
-       
-<a class="button" href="car-details.html?id=proton-saga">
-  VIEW DETAILS
-</a>
-
-      </div>
-    </div>
-
-  </div>
-  <p id="noResults"
-     style="display:none;text-align:center;color:#aaa">
     No cars found.
   </p>
 
@@ -455,182 +405,187 @@ footer {
   <p>&copy; 2026 Air Plus Performance</p>
 </footer>
 
+<script src="cars.js"></script>
 
 <script>
-
-// Brand and Model List
-const carModels = {
-  "Perodua": [
-    "Myvi", "Axia", "Bezza", "Alza",
-    "Ativa", "Aruz", "Viva", "Kelisa", "Kancil"
-  ],
-  "Proton": [
-    "Saga", "Persona", "Iriz", "Preve",
-    "Exora", "Wira", "Waja", "Gen-2",
-    "Satria", "Perdana", "X50", "X70",
-    "X90", "S70"
-  ],
-  "Toyota": [
-    "Vios", "Yaris", "Corolla", "Altis",
-    "Camry", "Hilux", "Innova", "Avanza",
-    "Rush", "Fortuner", "Alphard", "Vellfire"
-  ],
-  "Honda": [
-    "City", "Civic", "Jazz", "HR-V",
-    "CR-V", "BR-V", "Accord", "WR-V"
-  ],
-  "Nissan": [
-    "Almera", "Grand Livina", "Serena",
-    "Navara", "X-Trail", "Teana"
-  ],
-  "Mazda": [
-    "Mazda 2", "Mazda 3", "Mazda 6",
-    "CX-3", "CX-5", "CX-8", "CX-30"
-  ],
-  "Mitsubishi": [
-    "Triton", "ASX", "Outlander",
-    "Xpander", "Pajero Sport"
-  ],
-  "Isuzu": ["D-Max", "MU-X"],
-  "Ford": [
-    "Ranger", "Everest", "Fiesta", "Focus"
-  ],
-  "Hyundai": [
-    "Elantra", "Accent", "Tucson",
-    "Santa Fe", "Starex"
-  ],
-  "Kia": [
-    "Picanto", "Rio", "Cerato",
-    "Sportage", "Sorento", "Carnival"
-  ],
-  "Suzuki": [
-    "Swift", "Alto", "Celerio",
-    "Vitara", "Jimny"
-  ],
-  "Volkswagen": [
-    "Polo", "Vento", "Jetta",
-    "Golf", "Passat", "Tiguan"
-  ],
-  "BMW": [
-    "1 Series", "3 Series", "5 Series",
-    "X1", "X3", "X5"
-  ],
-  "Mercedes-Benz": [
-    "A-Class", "C-Class", "E-Class",
-    "GLA", "GLC"
-  ],
-  "Subaru": ["XV", "Forester", "Impreza"],
-  "Lexus": ["IS", "ES", "NX", "RX"],
-  "Audi": ["A3", "A4", "A6", "Q3", "Q5"],
-  "Peugeot": ["208", "3008", "5008"],
-  "Chery": ["Omoda 5", "Tiggo 7", "Tiggo 8"],
-  "BYD": ["Atto 3", "Dolphin", "Seal"],
-  "GWM": ["Haval H6", "Ora Good Cat", "Tank 300"],
-  "MG": ["MG4", "MG5", "ZS"],
-  "Jetour": ["Dashing", "X70 Plus"],
-  "Jaecoo": ["J7", "J8"],
-  "Omoda": ["C5", "E5"]
-};
-
-// Get filter elements
+// Shared car data
+const carGrid = document.getElementById("carGrid");
 const brandFilter = document.getElementById("brandFilter");
 const modelFilter = document.getElementById("modelFilter");
 const priceFilter = document.getElementById("priceFilter");
+const searchInput = document.getElementById("search");
+const noResults = document.getElementById("noResults");
 
-// Add all brands
-Object.keys(carModels).sort().forEach(brand => {
-  const option = document.createElement("option");
-  option.value = brand;
-  option.textContent = brand;
-  brandFilter.appendChild(option);
-});
+const cars = (
+  typeof carData !== "undefined" &&
+  Array.isArray(carData)
+) ? carData : [];
 
-// Update models when brand changes
+// Generate car cards
+function renderCars() {
+  carGrid.replaceChildren();
+
+  const fragment = document.createDocumentFragment();
+
+  cars.forEach(car => {
+    const card = document.createElement("div");
+    card.className = "car-card";
+
+    const photo = document.createElement("div");
+    photo.className = "car-photo";
+
+    if (
+      Array.isArray(car.photos) &&
+      car.photos.length > 0 &&
+      car.photos[0]
+    ) {
+      const img = document.createElement("img");
+      img.src = car.photos[0];
+      img.alt = `${car.brand} ${car.model} ${car.year}`;
+      img.loading = "lazy";
+
+      img.onerror = () => {
+        photo.textContent = "🚗";
+      };
+
+      photo.appendChild(img);
+    } else {
+      photo.textContent = "🚗";
+    }
+
+    const info = document.createElement("div");
+    info.className = "car-info";
+
+    const name = document.createElement("h3");
+    name.textContent = `${car.brand} ${car.model}`;
+
+    const year = document.createElement("div");
+    year.className = "car-year";
+    year.textContent = `Year: ${car.year}`;
+
+    const price = document.createElement("div");
+    price.className = "car-price";
+    price.textContent =
+      `RM${Number(car.price).toLocaleString("en-MY")}`;
+
+    const link = document.createElement("a");
+    link.className = "button";
+    link.href =
+      `car-details.html?id=${encodeURIComponent(car.id)}`;
+    link.textContent = "VIEW DETAILS";
+
+    info.append(name, year, price, link);
+    card.append(photo, info);
+    fragment.appendChild(card);
+  });
+
+  carGrid.appendChild(fragment);
+}
+
+// Brands from actual car data
+function populateBrands() {
+  const brands = [
+    ...new Set(
+      cars.map(car => car.brand).filter(Boolean)
+    )
+  ].sort((a, b) => a.localeCompare(b));
+
+  brandFilter.innerHTML =
+    '<option value="">All Brands</option>';
+
+  brands.forEach(brand => {
+    const option = document.createElement("option");
+    option.value = brand;
+    option.textContent = brand;
+    brandFilter.appendChild(option);
+  });
+}
+
+// Models based on selected brand
 function updateModels() {
-  modelFilter.innerHTML = '<option value="">All Models</option>';
-
   const brand = brandFilter.value;
 
-  if (brand && carModels[brand]) {
-    carModels[brand].forEach(model => {
-      const option = document.createElement("option");
-      option.value = model;
-      option.textContent = model;
-      modelFilter.appendChild(option);
-    });
-  }
+  const models = [
+    ...new Set(
+      cars
+        .filter(car => !brand || car.brand === brand)
+        .map(car => car.model)
+        .filter(Boolean)
+    )
+  ].sort((a, b) => a.localeCompare(b));
+
+  modelFilter.innerHTML =
+    '<option value="">All Models</option>';
+
+  models.forEach(model => {
+    const option = document.createElement("option");
+    option.value = model;
+    option.textContent = model;
+    modelFilter.appendChild(option);
+  });
 
   modelFilter.disabled = !brand;
   searchCars();
 }
 
-// Search and filter cars
+// Search and filter
 function searchCars() {
-  const query = document.getElementById("search")
-    .value.toLowerCase().trim();
+  const query = searchInput.value
+    .toLowerCase()
+    .trim();
 
-  const brand = brandFilter.value.toLowerCase();
-  const model = modelFilter.value.toLowerCase();
+  const brand = brandFilter.value;
+  const model = modelFilter.value;
   const maxPrice = Number(priceFilter.value);
 
-  const cars = document.querySelectorAll(".car-card");
+  const cards = carGrid.querySelectorAll(".car-card");
   let visible = 0;
 
-  cars.forEach(car => {
-    const name = car.querySelector("h3")
-      .textContent.toLowerCase();
+  cars.forEach((car, index) => {
+    const name =
+      `${car.brand} ${car.model}`.toLowerCase();
 
-    const priceText = car.querySelector(".car-price")
-      .textContent;
+    const match =
+      name.includes(query) &&
+      (!brand || car.brand === brand) &&
+      (!model || car.model === model) &&
+      (!maxPrice || Number(car.price) <= maxPrice);
 
-    const price = Number(
-      priceText.replace(/[^0-9.]/g, "")
-    );
+    cards[index].style.display = match ? "" : "none";
 
-    const matchText = name.includes(query);
-    const matchBrand = !brand ||
-      name.startsWith(brand + " ");
-
-    const modelPart = brand ?
-      name.slice(brand.length).trim() : name;
-
-    const matchModel = !model ||
-      modelPart === model ||
-      modelPart.startsWith(model + " ");
-
-    const matchPrice = !maxPrice || price <= maxPrice;
-
-    const match = matchText && matchBrand &&
-      matchModel && matchPrice;
-
-    car.style.display = match ? "" : "none";
-
-    if (match) visible++;
+    if (match) {
+      visible++;
+    }
   });
 
-  document.getElementById("noResults")
-    .style.display = visible === 0 ? "block" : "none";
+  noResults.style.display =
+    visible === 0 ? "block" : "none";
+
+  noResults.textContent =
+    cars.length === 0
+      ? "No cars available. Please check cars.js."
+      : "No cars found.";
 }
 
-// Connect dropdowns
+// Reset filters
+function resetFilters() {
+  brandFilter.value = "";
+  priceFilter.value = "";
+  searchInput.value = "";
+  updateModels();
+}
+
+// Events
 brandFilter.addEventListener("change", updateModels);
 modelFilter.addEventListener("change", searchCars);
 priceFilter.addEventListener("change", searchCars);
 
-// Initial setup
-modelFilter.disabled = true;
-  
-function resetFilters() {
-  brandFilter.value = "";
-  updateModels();
-  priceFilter.value = "";
-  document.getElementById("search").value = "";
-  searchCars();
-}
-
+// Initial loading
+renderCars();
+populateBrands();
+updateModels();
 
 </script>
-
 
 </body>
 </html>
