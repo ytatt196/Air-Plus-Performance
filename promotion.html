@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Promotion | Air Plus Performance</title>
-
   <style>
     :root {
       --black: #101010;
@@ -13,386 +12,210 @@
       --white: #ffffff;
       --grey: #aaaaaa;
     }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--black); color: var(--white); font-family: Arial, sans-serif; }
+    header { background: #080808; border-bottom: 2px solid var(--gold); padding: 22px 20px; text-align: center; }
+    .logo { display: flex; justify-content: center; align-items: center; }
+    .logo img { width: 100%; max-width: 300px; height: auto; display: block; }
+    .navbar { display: flex; justify-content: center; align-items: center; gap: 22px; flex-wrap: wrap; margin-top: 18px; }
+    .navbar a { color: var(--white); text-decoration: none; font-weight: bold; font-size: 14px; transition: color .2s; }
+    .navbar a:hover, .navbar a.active { color: var(--gold); }
 
-    * {
-      box-sizing: border-box;
-    }
+    .hero { padding: 70px 20px; text-align: center; background: linear-gradient(135deg, #111, #30291c, #111); }
+    .hero h1 { font-size: 38px; margin: 0 0 20px; }
+    .hero p { max-width: 900px; margin: 0 auto; color: #d6d6d6; font-size: 18px; line-height: 1.6; }
 
-    body {
-      margin: 0;
-      background: var(--black);
-      color: var(--white);
-      font-family: Arial, sans-serif;
-    }
-
-    header {
-      background: #080808;
-      border-bottom: 2px solid var(--gold);
-      padding: 22px 20px;
-      text-align: center;
-    }
-
-    .logo {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .logo img {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      display: block;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 22px;
-      margin-top: 18px;
-    }
-
-    .navbar a {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: bold;
-      transition: color 0.2s;
-    }
-
-    .navbar a:hover,
-    .navbar a.active {
-      color: var(--gold);
-    }
-
-    .hero {
-      padding: 70px 20px;
-      text-align: center;
-      background: linear-gradient(135deg, #111111, #30291c, #111111);
-    }
-
-    .hero h1 {
-      color: var(--white);
-      font-size: 38px;
-      margin: 0 0 20px;
-    }
-
-    .hero p {
-      color: #d6d6d6;
-      font-size: 18px;
-      margin: 0;
-      max-width: 900px;
-      margin-inline: auto;
-      line-height: 1.6;
-    }
-
+    /* The background image covers the entire lower promotion area. */
     .promotion-section {
       position: relative;
-      padding: 60px 20px 80px;
-      background: #050505;
-      background-size: cover;
+      isolation: isolate;
+      padding: 60px 20px 75px;
+      background-color: #101010;
       background-position: center;
+      background-size: cover;
       background-repeat: no-repeat;
-      overflow: hidden;
     }
-
-    .promotion-overlay {
+    .promotion-section::before {
+      content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.72);
+      z-index: -1;
+      background: rgba(0, 0, 0, .70);
+      pointer-events: none;
     }
-
-    .promotion-content {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .promotion-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 28px;
-    }
-
+    .promotion-content { max-width: 1200px; margin: 0 auto; }
+    .promotion-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
     .promo-card {
-      background: rgba(28, 28, 28, 0.88);
+      min-width: 0;
+      padding: 30px;
+      background: rgba(28, 28, 28, .90);
       border: 1px solid #44391e;
       border-radius: 16px;
-      padding: 30px;
       text-align: center;
-      backdrop-filter: blur(2px);
     }
-
     .promo-image-box {
-      width: 100%;
       height: 220px;
-      background: rgba(0, 0, 0, 0.25);
+      margin-bottom: 25px;
+      background: rgba(0, 0, 0, .25);
       border: 1px solid #2c2413;
       border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       overflow: hidden;
-      margin-bottom: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-
-    .promo-image-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-
-    .promo-placeholder {
-      color: var(--grey);
-      font-size: 15px;
-    }
-
-    .promo-card h2 {
-      color: var(--gold);
-      font-size: 28px;
-      margin: 0 0 18px;
-    }
-
-    .promo-card p {
-      color: #dddddd;
-      font-size: 18px;
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    .note {
-      text-align: center;
-      color: #d0d0d0;
-      margin: 40px auto 0;
-      max-width: 1000px;
-      line-height: 1.7;
-      font-size: 17px;
-    }
-
-    .contact {
-      text-align: center;
-      margin-top: 35px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 16px 34px;
-      background: var(--gold);
-      color: #111;
-      text-decoration: none;
-      border-radius: 7px;
-      font-weight: bold;
-      transition: 0.2s;
-    }
-
-    .button:hover {
-      background: #e4c46d;
-      transform: translateY(-2px);
-    }
-
-    footer {
-      padding: 30px;
-      text-align: center;
-      background: #080808;
-      color: var(--grey);
-      border-top: 1px solid #44391e;
-    }
-
-    @media (max-width: 900px) {
-      .promotion-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
+    .promo-image-box img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .promo-placeholder { color: var(--grey); font-size: 64px; }
+    .promo-card h2 { margin: 0 0 18px; color: var(--gold); font-size: 28px; }
+    .promo-card p { margin: 0; color: #ddd; font-size: 18px; line-height: 1.7; white-space: pre-line; }
+    .note { max-width: 1000px; margin: 40px auto 0; text-align: center; color: #d0d0d0; line-height: 1.7; font-size: 16px; white-space: pre-line; }
+    .contact { margin-top: 35px; text-align: center; }
+    .button { display: inline-block; padding: 16px 34px; background: var(--gold); color: #111; border-radius: 7px; text-decoration: none; font-weight: bold; transition: background .2s, transform .2s; }
+    .button:hover { background: #e4c46d; transform: translateY(-2px); }
+    footer { padding: 30px; text-align: center; background: #080808; color: var(--grey); border-top: 1px solid #44391e; }
+    @media (max-width: 900px) { .promotion-grid { grid-template-columns: 1fr; } }
     @media (max-width: 600px) {
-      .navbar {
-        gap: 12px;
-      }
-
-      .navbar a {
-        font-size: 12px;
-      }
-
-      .hero h1 {
-        font-size: 28px;
-      }
-
-      .hero p {
-        font-size: 16px;
-      }
-
-      .promo-card {
-        padding: 22px;
-      }
-
-      .promo-card h2 {
-        font-size: 24px;
-      }
-
-      .promo-card p,
-      .note {
-        font-size: 16px;
-      }
-
-      .promo-image-box {
-        height: 180px;
-      }
+      .navbar { gap: 12px; }
+      .navbar a { font-size: 12px; }
+      .hero { padding: 55px 18px; }
+      .hero h1 { font-size: 28px; }
+      .hero p { font-size: 16px; }
+      .promotion-section { padding: 35px 15px 55px; }
+      .promo-card { padding: 22px; }
+      .promo-card h2 { font-size: 24px; }
+      .promo-card p, .note { font-size: 16px; }
+      .promo-image-box { height: 180px; }
     }
   </style>
 </head>
 <body>
+  <header>
+    <div class="logo"><img src="air-plus-logo.jpg" alt="Air Plus Performance Logo"></div>
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="index.html">HOME</a>
+      <a href="index.html#cars">OUR CARS</a>
+      <a href="promotion.html" class="active" aria-current="page">PROMOTION</a>
+      <a href="https://wa.me/60122939186" target="_blank" rel="noopener noreferrer">CONTACT US</a>
+    </nav>
+  </header>
 
-<header>
-  <div class="logo">
-    <img src="air-plus-logo.jpg" alt="Air Plus Performance Logo">
-  </div>
+  <main>
+    <section class="hero">
+      <h1 id="heroTitle">BUY A CAR &amp; GET A FREE GIFT!</h1>
+      <p id="heroSubtitle">Find your dream car at Air Plus Performance and enjoy an extra gift with your purchase!</p>
+    </section>
 
-  <nav class="navbar">
-    <a href="index.html">HOME</a>
-    <a href="index.html#cars">OUR CARS</a>
-    <a href="promotion.html" class="active">PROMOTION</a>
-    <a href="https://wa.me/60122939186"
-       target="_blank"
-       rel="noopener noreferrer">CONTACT US</a>
-  </nav>
-</header>
+    <section class="promotion-section" id="promotionSection" aria-label="Promotions">
+      <div class="promotion-content">
+        <div class="promotion-grid" id="promotionGrid">
+          <article class="promo-card">
+            <div class="promo-image-box"><span class="promo-placeholder" aria-hidden="true">☀️</span></div>
+            <h2>FREE TINTED</h2>
+            <p>Get complimentary window tinting with selected car purchases.</p>
+          </article>
+          <article class="promo-card">
+            <div class="promo-image-box"><span class="promo-placeholder" aria-hidden="true">📱</span></div>
+            <h2>FREE PLAYER</h2>
+            <p>Get a complimentary car multimedia player with selected car purchases.</p>
+          </article>
+        </div>
+        <p class="note" id="promotionNote">*Free gift depends on the selected car model. Gift type is subject to confirmation by Air Plus Performance. Terms &amp; conditions apply.</p>
+        <div class="contact">
+          <a class="button" id="promotionWhatsappButton" href="https://wa.me/60122939186?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20your%20promotion" target="_blank" rel="noopener noreferrer">WHATSAPP US FOR MORE INFO</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<section class="hero">
-  <h1 id="heroTitle">BUY A CAR & GET A FREE GIFT!</h1>
-  <p id="heroSubtitle">
-    Find your dream car at Air Plus Performance and enjoy an extra gift with your purchase!
-  </p>
-</section>
+  <footer>
+    <p>Air Plus Performance</p>
+    <p>Bank Loan | Loan Kedai | Sewa</p>
+    <p>&copy; 2026 Air Plus Performance</p>
+  </footer>
 
-<section class="promotion-section" id="promotionSection">
-  <div class="promotion-overlay"></div>
+  <script>
+    // The admin manages promotion.json through Decap CMS.
+    const defaults = {
+      heroTitle: "BUY A CAR & GET A FREE GIFT!",
+      heroSubtitle: "Find your dream car at Air Plus Performance and enjoy an extra gift with your purchase!",
+      sectionBackgroundImage: "",
+      promotions: [
+        { title: "FREE TINTED", description: "Get complimentary window tinting with selected car purchases.", image: "" },
+        { title: "FREE PLAYER", description: "Get a complimentary car multimedia player with selected car purchases.", image: "" }
+      ],
+      note: "*Free gift depends on the selected car model. Gift type is subject to confirmation by Air Plus Performance. Terms & conditions apply.",
+      whatsappButtonText: "WHATSAPP US FOR MORE INFO"
+    };
 
-  <div class="promotion-content">
-    <div class="promotion-grid" id="promotionGrid"></div>
-
-    <p class="note" id="promotionNote">
-      *Free gift depends on the selected car model. Gift type is subject to confirmation by Air Plus Performance. Terms & conditions apply.
-    </p>
-
-    <div class="contact">
-      <a class="button"
-         id="promotionWhatsappButton"
-         href="https://wa.me/60122939186?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20your%20promotion"
-         target="_blank"
-         rel="noopener noreferrer">
-        WHATSAPP US FOR MORE INFO
-      </a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <p>Air Plus Performance</p>
-  <p>Bank Loan | Loan Kedai | Sewa</p>
-  <p>&copy; 2026 Air Plus Performance</p>
-</footer>
-
-<script>
-const defaultPromotionData = {
-  heroTitle: "BUY A CAR & GET A FREE GIFT!",
-  heroSubtitle: "Find your dream car at Air Plus Performance and enjoy an extra gift with your purchase!",
-  sectionBackgroundImage: "",
-  promotions: [
-    {
-      title: "FREE TINTED",
-      description: "Get complimentary window tinting with selected car purchases.",
-      image: ""
-    },
-    {
-      title: "FREE PLAYER",
-      description: "Get a complimentary car multimedia player with selected car purchases.",
-      image: ""
+    // Turn paths from Decap CMS into project-relative file URLs.
+    // e.g. car-images/photo.jpg or /car-images/photo.jpg
+    function mediaURL(path) {
+      if (typeof path !== "string" || !path.trim()) return "";
+      const trimmed = path.trim();
+      if (/^https?:\/\//i.test(trimmed)) return trimmed;
+      if (/^(?:javascript|data):/i.test(trimmed) || trimmed.startsWith("//")) return "";
+      return trimmed.replace(/^\/+/, "");
     }
-  ],
-  note: "*Free gift depends on the selected car model. Gift type is subject to confirmation by Air Plus Performance. Terms & conditions apply.",
-  whatsappButtonText: "WHATSAPP US FOR MORE INFO"
-};
 
-async function loadPromotionData() {
-  let data = defaultPromotionData;
-
-  try {
-    const response = await fetch("promotion.json?v=" + Date.now());
-    if (response.ok) {
-      data = await response.json();
-    }
-  } catch (error) {
-    console.error("Failed to load promotion.json:", error);
-  }
-
-  renderPromotion(data);
-}
-
-function renderPromotion(data) {
-  document.getElementById("heroTitle").textContent =
-    data.heroTitle || defaultPromotionData.heroTitle;
-
-  document.getElementById("heroSubtitle").textContent =
-    data.heroSubtitle || defaultPromotionData.heroSubtitle;
-
-  document.getElementById("promotionNote").textContent =
-    data.note || defaultPromotionData.note;
-
-  const whatsappButton = document.getElementById("promotionWhatsappButton");
-  whatsappButton.textContent =
-    data.whatsappButtonText || defaultPromotionData.whatsappButtonText;
-
-  const promoSection = document.getElementById("promotionSection");
-  if (data.sectionBackgroundImage) {
-    promoSection.style.backgroundImage = `url("${data.sectionBackgroundImage}")`;
-  }
-
-  const promotionGrid = document.getElementById("promotionGrid");
-  promotionGrid.innerHTML = "";
-
-  const promotions = Array.isArray(data.promotions) && data.promotions.length
-    ? data.promotions
-    : defaultPromotionData.promotions;
-
-  promotions.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "promo-card";
-
-    const imageBox = document.createElement("div");
-    imageBox.className = "promo-image-box";
-
-    if (item.image) {
-      const img = document.createElement("img");
-      img.src = item.image;
-      img.alt = item.title || "Promotion image";
-      imageBox.appendChild(img);
-    } else {
-      const placeholder = document.createElement("div");
+    function createCard(item, index) {
+      const card = document.createElement("article");
+      card.className = "promo-card";
+      const imageBox = document.createElement("div");
+      imageBox.className = "promo-image-box";
+      const photoPath = mediaURL(item.image);
+      const placeholder = document.createElement("span");
       placeholder.className = "promo-placeholder";
-      placeholder.textContent = "No Image";
-      imageBox.appendChild(placeholder);
+      placeholder.setAttribute("aria-hidden", "true");
+      placeholder.textContent = index === 0 ? "☀️" : index === 1 ? "📱" : "🎁";
+
+      if (photoPath) {
+        const image = document.createElement("img");
+        image.src = photoPath;
+        image.alt = item.title || "Promotion gift";
+        image.loading = "lazy";
+        image.onerror = () => imageBox.replaceChildren(placeholder);
+        imageBox.appendChild(image);
+      } else {
+        imageBox.appendChild(placeholder);
+      }
+
+      const heading = document.createElement("h2");
+      heading.textContent = item.title || "PROMOTION";
+      const description = document.createElement("p");
+      description.textContent = item.description || "";
+      card.append(imageBox, heading, description);
+      return card;
     }
 
-    const title = document.createElement("h2");
-    title.textContent = item.title || "PROMOTION";
+    function renderPromotion(data) {
+      const info = data && typeof data === "object" ? data : defaults;
+      document.getElementById("heroTitle").textContent = info.heroTitle || defaults.heroTitle;
+      document.getElementById("heroSubtitle").textContent = info.heroSubtitle || defaults.heroSubtitle;
+      document.getElementById("promotionNote").textContent = info.note || defaults.note;
+      document.getElementById("promotionWhatsappButton").textContent = info.whatsappButtonText || defaults.whatsappButtonText;
 
-    const description = document.createElement("p");
-    description.textContent = item.description || "";
+      const section = document.getElementById("promotionSection");
+      const background = mediaURL(info.sectionBackgroundImage);
+      // CSS.escape is not needed: construct a URL from the resolved media path using a CSS-safe escaped string.
+      section.style.backgroundImage = background ? `url(${JSON.stringify(background)})` : "none";
 
-    card.appendChild(imageBox);
-    card.appendChild(title);
-    card.appendChild(description);
+      const grid = document.getElementById("promotionGrid");
+      const promotions = Array.isArray(info.promotions) ? info.promotions : defaults.promotions;
+      grid.replaceChildren(...promotions.filter(item => item && typeof item === "object").map(createCard));
+    }
 
-    promotionGrid.appendChild(card);
-  });
-}
+    async function loadPromotion() {
+      try {
+        const response = await fetch("promotion.json", { cache: "no-cache" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        renderPromotion(await response.json());
+      } catch (error) {
+        console.warn("Promotion content could not be loaded; displaying the default offers.", error);
+        renderPromotion(defaults);
+      }
+    }
 
-loadPromotionData();
-</script>
-
+    loadPromotion();
+  </script>
 </body>
 </html>
