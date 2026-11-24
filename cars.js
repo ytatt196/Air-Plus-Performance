@@ -7,6 +7,8 @@ const carData = [
     year: 2022,
     price: 58800,
     color: "Red",
+    mileage: null,
+    transmission: "",
     photos: [
       "Front Toyota yaris red.jpg",
       "Back Toyota Yaris red.jpg"
@@ -20,6 +22,8 @@ const carData = [
     year: 2021,
     price: 48800,
     color: "",
+    mileage: null,
+    transmission: "",
     photos: []
   },
 
@@ -30,6 +34,8 @@ const carData = [
     year: 2018,
     price: 43999,
     color: "",
+    mileage: null,
+    transmission: "",
     photos: []
   },
 
@@ -40,6 +46,8 @@ const carData = [
     year: 2015,
     price: 13800,
     color: "",
+    mileage: null,
+    transmission: "",
     photos: []
   }
 ];
