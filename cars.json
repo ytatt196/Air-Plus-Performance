@@ -50,6 +50,14 @@
       "status": "available",
       "id": "proton-saga",
       "year": 2015
+    },
+    {
+      "id": "test-car-001",
+      "brand": "test",
+      "model": "demo car",
+      "year": 2020,
+      "price": 10000,
+      "status": "available"
     }
   ]
 }
