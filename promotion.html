@@ -14,7 +14,7 @@
     }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--black); color: var(--white); font-family: Arial, sans-serif; }
-    header { background: #080808; border-bottom: 2px solid var(--gold); padding: 22px 20px; text-align: center; }
+    header { background: #080808; background-position: center; background-size: cover; background-repeat: no-repeat; border-bottom: 2px solid var(--gold); padding: 22px 20px; text-align: center; }
     .logo { display: flex; justify-content: center; align-items: center; }
     .logo img { width: 100%; max-width: 300px; height: auto; display: block; }
     .navbar { display: flex; justify-content: center; align-items: center; gap: 22px; flex-wrap: wrap; margin-top: 18px; }
@@ -215,6 +215,23 @@
       }
     }
 
+    // Share the same header image configured in Decap CMS > Website Backgrounds.
+    async function loadHeaderBackground() {
+      try {
+        const response = await fetch("site-design.json", { cache: "no-cache" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const design = await response.json();
+        const image = mediaURL(design.headerBackgroundImage);
+        if (image) {
+          const header = document.querySelector("header");
+          header.style.backgroundImage = `linear-gradient(rgba(0,0,0,.38), rgba(0,0,0,.38)), url(${JSON.stringify(image)})`;
+        }
+      } catch (error) {
+        console.warn("Header background could not be loaded; using default color.", error);
+      }
+    }
+
+    loadHeaderBackground();
     loadPromotion();
   </script>
 </body>
