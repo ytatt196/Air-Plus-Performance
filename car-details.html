@@ -202,14 +202,9 @@ footer {
   <p>&copy; 2026 Air Plus Performance</p>
 </footer>
 
-<script src="cars.js"></script>
 <script>
 const params = new URLSearchParams(window.location.search);
 const carId = params.get("id");
-const cars = (typeof carData !== "undefined" && Array.isArray(carData))
-  ? carData
-  : [];
-const car = cars.find(item => item && item.id === carId);
 
 const titleElement = document.getElementById("carTitle");
 const gallery = document.getElementById("gallery");
@@ -236,10 +231,14 @@ function addDetailRow(label, value) {
   details.appendChild(row);
 }
 
-if (!car) {
-  titleElement.textContent = "Car Not Found";
-  showGalleryMessage("This car is not available.");
-} else {
+function renderCar(car) {
+  details.replaceChildren();
+  if (!car) {
+    titleElement.textContent = "Car Not Found";
+    showGalleryMessage("This car is not available.");
+    return;
+  }
+
   const fullName = `${car.brand || ""} ${car.model || ""}`.trim();
   document.title = `${fullName} | Air Plus Performance`;
   titleElement.textContent = fullName;
@@ -251,6 +250,7 @@ if (!car) {
   if (photos.length === 0) {
     showGalleryMessage("No Photo Available");
   } else {
+    gallery.replaceChildren();
     const images = [];
     let currentPhoto = 0;
 
@@ -288,7 +288,6 @@ if (!car) {
 
     photos.forEach(photo => {
       const img = document.createElement("img");
-      img.src = photo;
       img.alt = fullName;
       img.onerror = () => {
         const index = images.indexOf(img);
@@ -301,6 +300,7 @@ if (!car) {
       };
       images.push(img);
       gallery.appendChild(img);
+      img.src = photo;
     });
 
     gallery.append(prev, next);
@@ -316,7 +316,7 @@ if (!car) {
   addDetailRow("Year", car.year ?? "Not specified");
   addDetailRow("Colour", car.color || "Not specified");
 
-  // Optional values appear only when actually provided.
+  // Optional details are only shown when they have values.
   if (car.mileage !== null && car.mileage !== undefined && car.mileage !== "") {
     const mileage = Number(car.mileage);
     if (Number.isFinite(mileage) && mileage >= 0) {
@@ -330,7 +330,8 @@ if (!car) {
   const priceElement = document.createElement("div");
   priceElement.className = "price";
   const priceValue = Number(car.price);
-  priceElement.textContent = Number.isFinite(priceValue) && priceValue >= 0
+  priceElement.textContent = car.price !== null && car.price !== undefined && car.price !== "" &&
+    Number.isFinite(priceValue) && priceValue >= 0
     ? `RM${priceValue.toLocaleString("en-MY")}`
     : "Price on request";
   details.appendChild(priceElement);
@@ -346,6 +347,35 @@ if (!car) {
   enquiry.textContent = "ENQUIRE VIA WHATSAPP";
   details.appendChild(enquiry);
 }
+
+async function loadCarDetails() {
+  if (!carId) {
+    renderCar(null);
+    return;
+  }
+
+  try {
+    const response = await fetch("cars.json", { cache: "no-cache" });
+    if (!response.ok) {
+      throw new Error(`Failed to load cars.json (HTTP ${response.status})`);
+    }
+
+    const data = await response.json();
+    if (!data || !Array.isArray(data.cars)) {
+      throw new Error("cars.json must contain a cars array");
+    }
+
+    const car = data.cars.find(item => item && item.id === carId);
+    renderCar(car);
+  } catch (error) {
+    console.error("Unable to load car details:", error);
+    titleElement.textContent = "Unable to Load Car Details";
+    showGalleryMessage("Unable to load this car right now. Please try again later.");
+    details.replaceChildren();
+  }
+}
+
+loadCarDetails();
 </script>
 </body>
 </html>
