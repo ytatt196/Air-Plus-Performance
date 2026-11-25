@@ -54,9 +54,11 @@ jobs:
                   if not isinstance(car.get(field), str) or not car[field].strip():
                       raise ValueError(f"{car_id}: invalid {field}")
 
+              
               year = car.get("year")
-              if type(year) is not int or not 1900 <= year <= 2100:
-                  raise ValueError(f"{car_id}: invalid year")
+              if year is not None:
+                  if type(year) is not int or not 1900 <= year <= 2100:
+                      raise ValueError(f"{car_id}: invalid year")
 
               price = car.get("price")
               if type(price) not in (int, float) or price < 0:
