@@ -1,0 +1,16 @@
+{
+  "id": "toyota-uzj100-v8-petrol",
+  "brand": "Toyota",
+  "model": "Land Cruiser UZJ100 V8",
+  "price": 38800,
+  "transmission": "Automatic",
+  "photos": [
+    "toyota-uzj100-v8-petrol-front.jpeg",
+    "toyota-uzj100-v8-petrol-back.jpeg",
+    "toyota-uzj100-v8-petrol-steering.jpeg",
+    "toyota-uzj100-v8-petrol-interior-front-1.jpeg",
+    "toyota-uzj100-v8-petrol-interior-back.jpeg"
+  ],
+  "color": "Silver",
+  "status": "available"
+}
