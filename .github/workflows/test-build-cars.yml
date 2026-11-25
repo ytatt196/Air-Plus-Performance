@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout test branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Generate test vehicle data
         run: python3 scripts/build-cars.py
@@ -77,7 +77,7 @@ jobs:
 
 
       - name: Save generated JSON for inspection
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: generated-car-data
           path: cars.generated.json
