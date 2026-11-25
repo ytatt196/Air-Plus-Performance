@@ -1,11 +1,13 @@
+
 backend:
   name: turbo-github
   turbo_site_id: 0a3b6d92-313a-4da4-b9b2-535f82913bd2
   branch: main
+
 media_folder: "car-images"
 public_folder: "car-images"
-collections:
 
+collections:
   - name: "promotion_management"
     label: "Promotion Management"
     files:
@@ -45,9 +47,9 @@ collections:
           - { label: "Logo / Header Background (All Pages)", name: "headerBackgroundImage", widget: "image", required: false }
           - { label: "HOME Main Banner Background", name: "homeBackgroundImage", widget: "image", required: false }
           - { label: "OUR CARS Full Background", name: "carsBackgroundImage", widget: "image", required: false }
-          
-    # Individual car records
-    - name: "individual_cars_test"
+
+  # Individual car records
+  - name: "individual_cars_test"
     label: "Vehicle Management"
     label_singular: "Car"
     folder: "cars"
@@ -96,5 +98,3 @@ collections:
           label: "Photo"
           name: "photo"
           widget: "image"
-
-
