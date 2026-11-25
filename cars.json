@@ -19,9 +19,15 @@
       "year": 2022
     },
     {
-      "photos": [],
-      "color": "",
-      "transmission": "",
+      "photos": [
+        "car-images/whatsapp-image-2026-11-18-at-1.19.33-pm.jpeg",
+        "car-images/whatsapp-image-2026-11-18-at-1.19.34-pm.jpeg",
+        "car-images/whatsapp-image-2026-11-18-at-1.19.34-pm1.jpeg",
+        "car-images/whatsapp-image-2026-11-18-at-1.19.34-pm2.jpeg",
+        "car-images/whatsapp-image-2026-11-18-at-1.19.35-pm4.jpeg"
+      ],
+      "color": "Black",
+      "transmission": "CVT",
       "brand": "Perodua",
       "price": 48800,
       "model": "Ativa AV 1.0T",
