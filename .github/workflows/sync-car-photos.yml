@@ -25,6 +25,7 @@ jobs:
       - name: Get repository files
         uses: actions/checkout@v6
         with:
+          ref: main
           persist-credentials: true
 
       - name: Sync vehicle photo lists
