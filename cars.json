@@ -120,6 +120,22 @@
         "cars/perodua-myvi-se-2014/photos/peroduo-myvi-se-1.3-2014-interior-back.jpeg"
       ],
       "status": "available"
+    },
+    {
+      "id": "proton-persona-2019",
+      "brand": "proton",
+      "model": "persona",
+      "year": 2019,
+      "color": "Brown Metallic",
+      "transmission": "Automatic",
+      "status": "available",
+      "photos": [
+        "cars/proton-persona-2019/photos/proton-persona-2019-front.jpeg",
+        "cars/proton-persona-2019/photos/proton-persona-2019-back.jpeg",
+        "cars/proton-persona-2019/photos/proton-persona-2019-steering.jpeg",
+        "cars/proton-persona-2019/photos/proton-persona-2019-interior-front.jpeg",
+        "cars/proton-persona-2019/photos/proton-persona-2019-interior-back.jpeg"
+      ]
     }
   ]
 }
