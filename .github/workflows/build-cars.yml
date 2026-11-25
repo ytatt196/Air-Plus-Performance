@@ -1,0 +1,72 @@
+
+name: Build Website Car Data
+
+on:
+  push:
+    branches:
+      - cms-gallery-upgrade
+    paths:
+      - "cars/*/index.json"
+      - "scripts/build-cars.py"
+      - ".github/workflows/build-cars.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-cars-test
+  cancel-in-progress: false
+
+jobs:
+  build-cars:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout test branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Generate car data
+        run: python3 scripts/build-cars.py
+
+      - name: Verify generated data
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("cars.generated.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+
+          cars = data.get("cars")
+          if not isinstance(cars, list) or not cars:
+              raise ValueError("Generated car list is empty or invalid")
+
+          ids = [car["id"] for car in cars]
+          if len(ids) != len(set(ids)):
+              raise ValueError("Duplicate car IDs found")
+
+          for car in cars:
+              if not isinstance(car.get("photos"), list):
+                  raise ValueError(f"Invalid photo list: {car['id']}")
+
+          print(f"Validated {len(cars)} vehicles")
+          PY
+
+      - name: Update website cars.json
+        run: |
+          cp cars.generated.json cars.json
+
+          git add -- cars.json
+
+          if git diff --cached --quiet; then
+            echo "No vehicle data changes."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git commit -m "Auto-update website vehicle data"
+          git push origin HEAD:cms-gallery-upgrade
