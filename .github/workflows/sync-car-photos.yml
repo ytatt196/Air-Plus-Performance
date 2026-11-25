@@ -84,10 +84,17 @@ jobs:
           print(f"Updated vehicle records: {changed}")
           PY
 
+      - name: Rebuild website car data
+        shell: bash
+        run: |
+          python3 scripts/build-cars.py
+          cp cars.generated.json cars.json
+
+
       - name: Commit updated galleries
         shell: bash
         run: |
-          git add -u -- cars/
+       git add -u -- cars/ cars.json
 
           if git diff --cached --quiet; then
             echo "No gallery changes to commit."
