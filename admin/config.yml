@@ -95,4 +95,53 @@ collections:
           - { label: "Logo / Header Background (All Pages)", name: "headerBackgroundImage", widget: "image", required: false }
           - { label: "HOME Main Banner Background", name: "homeBackgroundImage", widget: "image", required: false }
           - { label: "OUR CARS Full Background", name: "carsBackgroundImage", widget: "image", required: false }
+          
+  # TEST: Individual car records
+  - name: "individual_cars_test"
+    label: "Individual Cars (TEST)"
+    label_singular: "Car"
+    folder: "cars"
+    create: true
+    extension: "json"
+    format: "json"
+    identifier_field: "id"
+    slug: "{{slug}}"
+    summary: "{{brand}} {{model}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Car ID", name: "id", widget: "string", hint: "Unique ID. Do not change after creating." }
+      - { label: "Brand", name: "brand", widget: "string" }
+      - { label: "Model", name: "model", widget: "string" }
+      - { label: "Year", name: "year", widget: "number", value_type: "int" }
+      - { label: "Price (RM)", name: "price", widget: "number", value_type: "int", min: 0 }
+      - { label: "Colour", name: "color", widget: "string", required: false }
+      - { label: "Mileage (km)", name: "mileage", widget: "number", value_type: "int", min: 0, required: false }
+      - label: "Transmission"
+        name: "transmission"
+        widget: "select"
+        required: false
+        options:
+          - "Automatic"
+          - "Manual"
+          - "CVT"
+          - "DCT"
+          - "Other"
+      - label: "Car Status"
+        name: "status"
+        widget: "select"
+        options:
+          - { label: "Available", value: "available" }
+          - { label: "In Preparation", value: "preparation" }
+          - { label: "Reserved", value: "reserved" }
+          - { label: "Sold", value: "sold" }
+      - label: "Car Photos"
+        name: "photos"
+        widget: "list"
+        required: false
+        field:
+          label: "Photo"
+          name: "photo"
+          widget: "image"
+
 
