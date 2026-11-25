@@ -1,0 +1,54 @@
+
+name: Test Car Data Generator
+
+on:
+  push:
+    branches:
+      - cms-gallery-upgrade
+    paths:
+      - "scripts/build-cars.py"
+      - "cars/*/index.json"
+      - ".github/workflows/test-build-cars.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  test-generator:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout test branch
+        uses: actions/checkout@v4
+
+      - name: Generate test vehicle data
+        run: python3 scripts/build-cars.py
+
+      - name: Validate generated JSON
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          original = json.loads(Path("cars.json").read_text(encoding="utf-8"))
+          generated = json.loads(Path("cars.generated.json").read_text(encoding="utf-8"))
+
+          old = {car["id"]: car for car in original["cars"]}
+          new = {car["id"]: car for car in generated["cars"]}
+
+          assert len(new) == 4, f"Expected 4 cars, found {len(new)}"
+          assert set(old) == set(new), "Vehicle IDs do not match"
+
+          for car_id, car in new.items():
+              previous = old[car_id]
+
+              for field in ("brand", "model", "year", "price", "color", "mileage", "transmission", "status"):
+                  assert car.get(field) == previous.get(field), f"{car_id}: {field} changed"
+
+              assert car["photos"] == previous["photos"], f"{car_id}: photo paths changed"
+
+              print(f"PASS: {car_id} ({len(car['photos'])} photos)")
+
+          print("SUCCESS: All 4 cars match the original data.")
+          PY
+
