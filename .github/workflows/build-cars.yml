@@ -14,7 +14,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: build-cars-production
+  group: vehicle-data-production
   cancel-in-progress: false
 
 jobs:
