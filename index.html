@@ -668,7 +668,12 @@ function renderCars() {
 
     const year = document.createElement("div");
     year.className = "car-year";
-    year.textContent = `Year: ${car.year}`;
+    
+    if (car.year !== null && car.year !== undefined && String(car.year).trim() !== "") {
+      year.textContent = `Year: ${car.year}`;
+    } else {
+      year.style.display = "none";
+    }
 
     const price = document.createElement("div");
     price.className = "car-price";
