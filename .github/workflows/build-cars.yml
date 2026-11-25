@@ -26,6 +26,7 @@ jobs:
       - name: Checkout production branch
         uses: actions/checkout@v6
         with:
+          ref: main
           persist-credentials: true
 
       - name: Generate car data
