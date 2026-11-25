@@ -1,0 +1,16 @@
+{
+  "id": "proton-perdana",
+  "brand": "proton",
+  "model": "perdana 2.4",
+  "price": 43999,
+  "color": "Black",
+  "status": "available",
+  "photos": [
+    "proton-perdana-2.4-front.jpeg",
+    "proton-perdana-2.4-back.jpeg",
+    "proton-perdana-2.4-engine.jpeg",
+    "proton-perdana-2.4-steering.jpeg",
+    "proton-perdana-2.4-interior-front.jpeg",
+    "proton-perdana-2.4-interior-back.jpeg"
+  ]
+}
