@@ -1,0 +1,94 @@
+
+name: Build Website Car Data
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "cars/*/index.json"
+      - "scripts/build-cars.py"
+      - ".github/workflows/build-cars.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vehicle-data-production
+  cancel-in-progress: false
+  queue: max
+
+jobs:
+  build-cars:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout production branch
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          persist-credentials: true
+
+      - name: Generate car data
+        run: python3 scripts/build-cars.py
+
+      - name: Verify generated data
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("cars.generated.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+
+          cars = data.get("cars")
+          if not isinstance(cars, list) or not cars:
+              raise ValueError("Generated car list is empty or invalid")
+
+          ids = [car["id"] for car in cars]
+          if len(ids) != len(set(ids)):
+              raise ValueError("Duplicate car IDs found")
+
+          for car in cars:
+              if not isinstance(car.get("photos"), list):
+                  raise ValueError(f"Invalid photo list: {car['id']}")
+
+          print(f"Validated {len(cars)} vehicles")
+          PY
+
+     
+      - name: Update website cars.json
+        shell: bash
+        run: |
+          set -e
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt of 3"
+
+            git fetch origin main
+            git reset --hard origin/main
+
+            python3 scripts/build-cars.py
+            cp cars.generated.json cars.json
+            git add -- cars.json
+
+            if git diff --cached --quiet; then
+              echo "Website car data is already up to date."
+              exit 0
+            fi
+
+            git commit -m "Auto-update website vehicle data"
+
+            if git push origin HEAD:main; then
+              echo "Vehicle data updated successfully."
+              exit 0
+            fi
+
+            echo "Push failed. Will retry using latest main."
+          done
+
+          echo "Failed to update vehicle data after 3 attempts."
+          exit 1

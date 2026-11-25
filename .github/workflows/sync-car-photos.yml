@@ -1,0 +1,131 @@
+
+name: Sync Car Photo Galleries
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "cars/*/photos/**"
+      - ".github/workflows/sync-car-photos.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vehicle-data-production
+  cancel-in-progress: false
+  queue: max
+
+jobs:
+  sync-photos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get repository files
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          persist-credentials: true
+
+      - name: Sync galleries and website data with retry
+        shell: bash
+        run: |
+          set -e
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt of 3"
+
+            git fetch origin main
+            git reset --hard origin/main
+
+            python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          extensions = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
+          changed = 0
+
+          for record in sorted(Path("cars").glob("*/index.json")):
+              folder = record.parent / "photos"
+              if not folder.is_dir():
+                  continue
+
+              data = json.loads(record.read_text(encoding="utf-8"))
+              photos = data.get("photos")
+
+              if photos is None:
+                  photos = []
+
+              if not isinstance(photos, list):
+                  raise ValueError(f"Invalid photos list: {record}")
+
+              known = {
+                  Path(str(photo)).name.casefold()
+                  for photo in photos
+              }
+
+              added = []
+
+              for file in sorted(
+                  folder.iterdir(),
+                  key=lambda p: p.name.casefold()
+              ):
+                  if not file.is_file():
+                      continue
+
+                  if file.suffix.lower() not in extensions:
+                      continue
+
+                  if file.name.casefold() in known:
+                      continue
+
+                  photos.append(file.name)
+                  known.add(file.name.casefold())
+                  added.append(file.name)
+
+              if added:
+                  data["photos"] = photos
+                  record.write_text(
+                      json.dumps(
+                          data,
+                          ensure_ascii=False,
+                          indent=2
+                      ) + "\n",
+                      encoding="utf-8"
+                  )
+                  changed += 1
+                  print(f"Updated {record}:")
+                  for name in added:
+                      print(f"  Added: {name}")
+              else:
+                  print(f"No changes: {record}")
+
+          print(f"Updated vehicle records: {changed}")
+          PY
+
+            python3 scripts/build-cars.py
+            cp cars.generated.json cars.json
+
+            git add -u -- cars/ cars.json
+
+            if git diff --cached --quiet; then
+              echo "Vehicle galleries and website data are up to date."
+              exit 0
+            fi
+
+            git commit -m "Auto-sync vehicle photo galleries"
+
+            if git push origin HEAD:main; then
+              echo "Gallery sync completed successfully."
+              exit 0
+            fi
+
+            echo "Push failed. Retrying with latest main."
+          done
+
+          echo "Gallery sync failed after 3 attempts."
+          exit 1

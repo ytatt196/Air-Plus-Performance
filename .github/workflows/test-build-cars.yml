@@ -1,0 +1,85 @@
+
+name: Test Car Data Generator
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/build-cars.py"
+      - "cars/*/index.json"
+      - ".github/workflows/test-build-cars.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  test-generator:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout test branch
+        uses: actions/checkout@v6
+
+      - name: Generate test vehicle data
+        run: python3 scripts/build-cars.py
+
+    
+      - name: Validate generated JSON
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          output = Path("cars.generated.json")
+          data = json.loads(output.read_text(encoding="utf-8"))
+
+          cars = data.get("cars")
+          if not isinstance(cars, list) or not cars:
+              raise ValueError("Car list is missing or empty")
+
+          ids = set()
+
+          for car in cars:
+              car_id = car.get("id")
+
+              if not isinstance(car_id, str) or not car_id.strip():
+                  raise ValueError("Invalid car ID")
+
+              if car_id in ids:
+                  raise ValueError(f"Duplicate car ID: {car_id}")
+              ids.add(car_id)
+
+              for field in ("brand", "model"):
+                  if not isinstance(car.get(field), str) or not car[field].strip():
+                      raise ValueError(f"{car_id}: invalid {field}")
+
+              year = car.get("year")
+              if type(year) is not int or not 1900 <= year <= 2100:
+                  raise ValueError(f"{car_id}: invalid year")
+
+              price = car.get("price")
+              if type(price) not in (int, float) or price < 0:
+                  raise ValueError(f"{car_id}: invalid price")
+
+              photos = car.get("photos")
+              if not isinstance(photos, list):
+                  raise ValueError(f"{car_id}: photos must be a list")
+
+              for photo in photos:
+                  if not isinstance(photo, str) or not photo.strip():
+                      raise ValueError(f"{car_id}: invalid photo path")
+
+              print(f"PASS: {car_id} ({len(photos)} photos)")
+
+          print(f"SUCCESS: Validated {len(cars)} vehicles.")
+          PY
+
+
+      - name: Save generated JSON for inspection
+        uses: actions/upload-artifact@v6
+        with:
+          name: generated-car-data
+          path: cars.generated.json
+          retention-days: 7
+
