@@ -68,7 +68,9 @@ collections:
       - { label: "Car ID", name: "id", widget: "string", hint: "Unique ID. Do not change after creating." }
       - { label: "Brand", name: "brand", widget: "string" }
       - { label: "Model", name: "model", widget: "string" }
-      - { label: "Year", name: "year", widget: "number", value_type: "int" }
+      
+      - { label: "Year", name: "year", widget: "number", value_type: "int", required: false }
+
       - { label: "Price (RM)", name: "price", widget: "number", value_type: "int", min: 0 }
       - { label: "Colour", name: "color", widget: "string", required: false }
       - { label: "Mileage (km)", name: "mileage", widget: "number", value_type: "int", min: 0, required: false }
