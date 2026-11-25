@@ -1,0 +1,16 @@
+{
+  "id": "proton-saga-mc1",
+  "brand": "Proton",
+  "model": "Saga Mc1",
+  "year": 2019,
+  "color": "Silver",
+  "transmission": "Manual",
+  "status": "available",
+  "photos": [
+    "proton-sage-mc1-front.jpeg",
+    "proton-sage-mc1-back.jpeg",
+    "proton-sage-mc1-steering.jpeg",
+    "proton-sage-mc1-interior-front.jpeg",
+    "proton-sage-mc1-interior-back.jpeg"
+  ]
+}
