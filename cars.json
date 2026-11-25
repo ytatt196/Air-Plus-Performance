@@ -104,6 +104,22 @@
         "cars/proton-perdana-1/photos/proton-perdana-2.4-interior-front.jpeg",
         "cars/proton-perdana-1/photos/proton-perdana-2.4-interior-back.jpeg"
       ]
+    },
+    {
+      "id": "perodua-myvi-se-2014",
+      "brand": "perodua",
+      "model": "myvi Se 1.3",
+      "year": 2014,
+      "color": "White",
+      "transmission": "Automatic",
+      "photos": [
+        "cars/perodua-myvi-se-2014/photos/peroduo-myvi-se-1.3-2014-front.jpeg",
+        "cars/perodua-myvi-se-2014/photos/peroduo-myvi-se-1.3-2014-back.jpeg",
+        "cars/perodua-myvi-se-2014/photos/peroduo-myvi-se-1.3-2014-steering.jpeg",
+        "cars/perodua-myvi-se-2014/photos/peroduo-myvi-se-1.3-2014-interior-front.jpeg",
+        "cars/perodua-myvi-se-2014/photos/peroduo-myvi-se-1.3-2014-interior-back.jpeg"
+      ],
+      "status": "available"
     }
   ]
 }
