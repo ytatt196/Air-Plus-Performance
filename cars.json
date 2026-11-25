@@ -3,15 +3,18 @@
     {
       "photos": [
         "Front Toyota yaris red.jpg",
-        "Back Toyota Yaris red.jpg"
+        "Back Toyota Yaris red.jpg",
+        "car-images/whatsapp-image-2026-11-18-at-1.19.10-pm-1.jpeg",
+        "car-images/whatsapp-image-2026-11-18-at-1.19.10-pm2.jpeg",
+        "car-images/whatsapp-image-2026-11-18-at-1.19.11-pm.jpeg"
       ],
       "color": "Red",
-      "transmission": "",
+      "transmission": "Automatic",
       "brand": "Toyota",
-      "price": 58800,
+      "price": 56800,
       "model": "Yaris 1.5E",
       "mileage": null,
-      "status": "reserved",
+      "status": "available",
       "id": "toyota-yaris",
       "year": 2022
     },
