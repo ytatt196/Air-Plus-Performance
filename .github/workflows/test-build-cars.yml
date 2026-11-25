@@ -60,9 +60,12 @@ jobs:
                   if type(year) is not int or not 1900 <= year <= 2100:
                       raise ValueError(f"{car_id}: invalid year")
 
+              
               price = car.get("price")
-              if type(price) not in (int, float) or price < 0:
-                  raise ValueError(f"{car_id}: invalid price")
+              if price is not None:
+                  if type(price) not in (int, float) or price < 0:
+                      raise ValueError(f"{car_id}: invalid price")
+
 
               photos = car.get("photos")
               if not isinstance(photos, list):
