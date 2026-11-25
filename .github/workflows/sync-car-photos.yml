@@ -94,7 +94,7 @@ jobs:
       - name: Commit updated galleries
         shell: bash
         run: |
-       git add -u -- cars/ cars.json
+          git add -u -- cars/ cars.json
 
           if git diff --cached --quiet; then
             echo "No gallery changes to commit."
