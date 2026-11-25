@@ -4,7 +4,7 @@ name: Build Website Car Data
 on:
   push:
     branches:
-      - cms-gallery-upgrade
+      - main
     paths:
       - "cars/*/index.json"
       - "scripts/build-cars.py"
@@ -14,7 +14,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: build-cars-test
+  group: build-cars-production
   cancel-in-progress: false
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout test branch
+      - name: Checkout production branch
         uses: actions/checkout@v6
         with:
           persist-credentials: true
@@ -69,4 +69,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git commit -m "Auto-update website vehicle data"
-          git push origin HEAD:cms-gallery-upgrade
+          git push origin HEAD:main
