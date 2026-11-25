@@ -1,0 +1,16 @@
+{
+  "id": "perodua-myvi-se-2014",
+  "brand": "perodua",
+  "model": "myvi Se 1.3",
+  "year": 2014,
+  "color": "White",
+  "transmission": "Automatic",
+  "photos": [
+    "peroduo-myvi-se-1.3-2014-front.jpeg",
+    "peroduo-myvi-se-1.3-2014-back.jpeg",
+    "peroduo-myvi-se-1.3-2014-steering.jpeg",
+    "peroduo-myvi-se-1.3-2014-interior-front.jpeg",
+    "peroduo-myvi-se-1.3-2014-interior-back.jpeg"
+  ],
+  "status": "available"
+}
