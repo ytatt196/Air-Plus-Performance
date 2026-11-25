@@ -1,0 +1,19 @@
+
+{
+  "id": "toyota-yaris",
+  "brand": "Toyota",
+  "model": "Yaris 1.5E",
+  "year": 2022,
+  "price": 56800,
+  "color": "Red",
+  "mileage": null,
+  "transmission": "Automatic",
+  "status": "available",
+  "photos": [
+    "Front Toyota yaris red.jpg",
+    "Back Toyota Yaris red.jpg",
+    "car-images/whatsapp-image-2026-11-18-at-1.19.10-pm-1.jpeg",
+    "car-images/whatsapp-image-2026-11-18-at-1.19.10-pm2.jpeg",
+    "car-images/whatsapp-image-2026-11-18-at-1.19.11-pm.jpeg"
+  ]
+}
