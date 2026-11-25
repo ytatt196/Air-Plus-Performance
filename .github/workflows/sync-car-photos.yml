@@ -1,5 +1,5 @@
 
-name: Check Car Photo Galleries
+name: Sync Car Photo Galleries
 
 on:
   push:
@@ -10,17 +10,23 @@ on:
       - ".github/workflows/sync-car-photos.yml"
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: sync-car-photos-test
+  cancel-in-progress: false
 
 jobs:
-  check-photos:
+  sync-photos:
     runs-on: ubuntu-latest
 
     steps:
       - name: Get repository files
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
-      - name: Check vehicle photo folders
+      - name: Sync vehicle photo lists
         shell: bash
         run: |
           python3 - <<'PY'
@@ -28,34 +34,68 @@ jobs:
           from pathlib import Path
 
           extensions = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
+          changed = 0
 
           for record in sorted(Path("cars").glob("*/index.json")):
-              car_folder = record.parent
-              photo_folder = car_folder / "photos"
+              folder = record.parent / "photos"
+              if not folder.is_dir():
+                  continue
 
               data = json.loads(record.read_text(encoding="utf-8"))
-              existing = data.get("photos") or []
-              existing_names = {
-                  Path(str(photo)).name.lower()
-                  for photo in existing
+              photos = data.get("photos")
+
+              if photos is None:
+                  photos = []
+
+              if not isinstance(photos, list):
+                  raise ValueError(f"Invalid photos list: {record}")
+
+              known = {
+                  Path(str(photo)).name.casefold()
+                  for photo in photos
               }
 
-              images = sorted(
-                  file for file in photo_folder.glob("*")
-                  if file.is_file() and file.suffix.lower() in extensions
-              ) if photo_folder.exists() else []
+              added = []
 
-              missing = [
-                  file.name for file in images
-                  if file.name.lower() not in existing_names
-              ]
+              for file in sorted(folder.iterdir(), key=lambda p: p.name.casefold()):
+                  if not file.is_file() or file.suffix.lower() not in extensions:
+                      continue
 
-              print(f"\nCar: {car_folder.name}")
-              print(f"Photos in folder: {len(images)}")
-              print(f"Not yet linked: {len(missing)}")
+                  if file.name.casefold() in known:
+                      continue
 
-              for name in missing:
-                  print(f"  Would add: {name}")
+                  photos.append(file.name)
+                  known.add(file.name.casefold())
+                  added.append(file.name)
 
-          print("\nCHECK COMPLETE - No files were changed.")
+              if added:
+                  data["photos"] = photos
+                  record.write_text(
+                      json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+                      encoding="utf-8"
+                  )
+                  changed += 1
+                  print(f"Updated {record}:")
+                  for name in added:
+                      print(f"  Added: {name}")
+              else:
+                  print(f"No changes: {record}")
+
+          print(f"Updated vehicle records: {changed}")
           PY
+
+      - name: Commit updated galleries
+        shell: bash
+        run: |
+          git add -u -- cars/
+
+          if git diff --cached --quiet; then
+            echo "No gallery changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git commit -m "Auto-sync vehicle photo galleries"
+          git push origin HEAD:cms-gallery-upgrade
