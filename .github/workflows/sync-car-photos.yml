@@ -1,0 +1,61 @@
+
+name: Check Car Photo Galleries
+
+on:
+  push:
+    branches:
+      - cms-gallery-upgrade
+    paths:
+      - "cars/*/photos/**"
+      - ".github/workflows/sync-car-photos.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  check-photos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get repository files
+        uses: actions/checkout@v4
+
+      - name: Check vehicle photo folders
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          extensions = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
+
+          for record in sorted(Path("cars").glob("*/index.json")):
+              car_folder = record.parent
+              photo_folder = car_folder / "photos"
+
+              data = json.loads(record.read_text(encoding="utf-8"))
+              existing = data.get("photos") or []
+              existing_names = {
+                  Path(str(photo)).name.lower()
+                  for photo in existing
+              }
+
+              images = sorted(
+                  file for file in photo_folder.glob("*")
+                  if file.is_file() and file.suffix.lower() in extensions
+              ) if photo_folder.exists() else []
+
+              missing = [
+                  file.name for file in images
+                  if file.name.lower() not in existing_names
+              ]
+
+              print(f"\nCar: {car_folder.name}")
+              print(f"Photos in folder: {len(images)}")
+              print(f"Not yet linked: {len(missing)}")
+
+              for name in missing:
+                  print(f"  Would add: {name}")
+
+          print("\nCHECK COMPLETE - No files were changed.")
+          PY
