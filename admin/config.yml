@@ -101,6 +101,9 @@ collections:
     label: "Individual Cars (TEST)"
     label_singular: "Car"
     folder: "cars"
+    path: "{{slug}}/index"
+    media_folder: "photos"
+    public_folder: ""
     create: true
     extension: "json"
     format: "json"
