@@ -54,6 +54,7 @@ collections:
     label_singular: "Car"
     folder: "cars"
     path: "{{slug}}/index"
+    slug_collision: reject
     media_folder: "photos"
     public_folder: ""
     create: true
