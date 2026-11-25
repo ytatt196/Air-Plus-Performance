@@ -1,0 +1,17 @@
+{
+  "photos": [
+    "proton-preve-1.6t-cvt-2018-front.jpeg",
+    "proton-preve-1.6t-cvt-2018-back.jpeg",
+    "proton-preve-1.6t-cvt-2018-steering.jpeg",
+    "proton-preve-1.6t-cvt-2018-interior-front.jpeg",
+    "proton-preve-1.6t-cvt-2018-interior-back.jpeg"
+  ],
+  "color": "White",
+  "transmission": "CVT",
+  "brand": "Proton",
+  "price": 21800,
+  "model": "Preve",
+  "status": "available",
+  "id": "proton-preve-2018",
+  "year": 2018
+}
