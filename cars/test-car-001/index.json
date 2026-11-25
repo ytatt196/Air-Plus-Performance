@@ -1,0 +1,10 @@
+{
+  "id": "test-car-001",
+  "brand": "test",
+  "model": "demo car",
+  "year": 2020,
+  "price": 10000,
+  "color": "white",
+  "transmission": "Automatic",
+  "status": "preparation"
+}
