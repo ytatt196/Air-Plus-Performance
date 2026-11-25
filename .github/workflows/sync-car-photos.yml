@@ -15,6 +15,7 @@ permissions:
 concurrency:
   group: vehicle-data-production
   cancel-in-progress: false
+  queue: max
 
 jobs:
   sync-photos:
