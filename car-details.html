@@ -423,7 +423,11 @@ function renderCar(car) {
 
   addDetailRow("Brand", car.brand || "Not specified");
   addDetailRow("Model", car.model || "Not specified");
-  addDetailRow("Year", car.year ?? "Not specified");
+ 
+if (car.year !== null && car.year !== undefined && String(car.year).trim() !== "") {
+  addDetailRow("Year", car.year);
+}
+
   addDetailRow("Colour", car.color || "Not specified");
 
   // Vehicle status is shown only on this detail page, not on the homepage.
