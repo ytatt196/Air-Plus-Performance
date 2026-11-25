@@ -1,0 +1,16 @@
+{
+  "id": "proton-persona-2019",
+  "brand": "proton",
+  "model": "persona",
+  "year": 2019,
+  "color": "Brown Metallic",
+  "transmission": "Automatic",
+  "status": "available",
+  "photos": [
+    "proton-persona-2019-front.jpeg",
+    "proton-persona-2019-back.jpeg",
+    "proton-persona-2019-steering.jpeg",
+    "proton-persona-2019-interior-front.jpeg",
+    "proton-persona-2019-interior-back.jpeg"
+  ]
+}
