@@ -56,19 +56,39 @@ jobs:
           print(f"Validated {len(cars)} vehicles")
           PY
 
+     
       - name: Update website cars.json
+        shell: bash
         run: |
-          cp cars.generated.json cars.json
-
-          git add -- cars.json
-
-          if git diff --cached --quiet; then
-            echo "No vehicle data changes."
-            exit 0
-          fi
+          set -e
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git commit -m "Auto-update website vehicle data"
-          git push origin HEAD:main
+          for attempt in 1 2 3; do
+            echo "Attempt $attempt of 3"
+
+            git fetch origin main
+            git reset --hard origin/main
+
+            python3 scripts/build-cars.py
+            cp cars.generated.json cars.json
+            git add -- cars.json
+
+            if git diff --cached --quiet; then
+              echo "Website car data is already up to date."
+              exit 0
+            fi
+
+            git commit -m "Auto-update website vehicle data"
+
+            if git push origin HEAD:main; then
+              echo "Vehicle data updated successfully."
+              exit 0
+            fi
+
+            echo "Push failed. Will retry using latest main."
+          done
+
+          echo "Failed to update vehicle data after 3 attempts."
+          exit 1
