@@ -52,3 +52,10 @@ jobs:
           print("SUCCESS: All 4 cars match the original data.")
           PY
 
+      - name: Save generated JSON for inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-car-data
+          path: cars.generated.json
+          retention-days: 7
+
