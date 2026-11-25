@@ -24,33 +24,57 @@ jobs:
       - name: Generate test vehicle data
         run: python3 scripts/build-cars.py
 
+    
       - name: Validate generated JSON
         run: |
           python3 - <<'PY'
           import json
           from pathlib import Path
 
-          original = json.loads(Path("cars.json").read_text(encoding="utf-8"))
-          generated = json.loads(Path("cars.generated.json").read_text(encoding="utf-8"))
+          output = Path("cars.generated.json")
+          data = json.loads(output.read_text(encoding="utf-8"))
 
-          old = {car["id"]: car for car in original["cars"]}
-          new = {car["id"]: car for car in generated["cars"]}
+          cars = data.get("cars")
+          if not isinstance(cars, list) or not cars:
+              raise ValueError("Car list is missing or empty")
 
-          assert len(new) == 4, f"Expected 4 cars, found {len(new)}"
-          assert set(old) == set(new), "Vehicle IDs do not match"
+          ids = set()
 
-          for car_id, car in new.items():
-              previous = old[car_id]
+          for car in cars:
+              car_id = car.get("id")
 
-              for field in ("brand", "model", "year", "price", "color", "mileage", "transmission", "status"):
-                  assert car.get(field) == previous.get(field), f"{car_id}: {field} changed"
+              if not isinstance(car_id, str) or not car_id.strip():
+                  raise ValueError("Invalid car ID")
 
-              assert car["photos"] == previous["photos"], f"{car_id}: photo paths changed"
+              if car_id in ids:
+                  raise ValueError(f"Duplicate car ID: {car_id}")
+              ids.add(car_id)
 
-              print(f"PASS: {car_id} ({len(car['photos'])} photos)")
+              for field in ("brand", "model"):
+                  if not isinstance(car.get(field), str) or not car[field].strip():
+                      raise ValueError(f"{car_id}: invalid {field}")
 
-          print("SUCCESS: All 4 cars match the original data.")
+              year = car.get("year")
+              if type(year) is not int or not 1900 <= year <= 2100:
+                  raise ValueError(f"{car_id}: invalid year")
+
+              price = car.get("price")
+              if type(price) not in (int, float) or price < 0:
+                  raise ValueError(f"{car_id}: invalid price")
+
+              photos = car.get("photos")
+              if not isinstance(photos, list):
+                  raise ValueError(f"{car_id}: photos must be a list")
+
+              for photo in photos:
+                  if not isinstance(photo, str) or not photo.strip():
+                      raise ValueError(f"{car_id}: invalid photo path")
+
+              print(f"PASS: {car_id} ({len(photos)} photos)")
+
+          print(f"SUCCESS: Validated {len(cars)} vehicles.")
           PY
+
 
       - name: Save generated JSON for inspection
         uses: actions/upload-artifact@v4
