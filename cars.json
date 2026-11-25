@@ -55,7 +55,13 @@
       "year": 2018
     },
     {
-      "photos": [],
+      "photos": [
+        "car-images/proton-saga-flx-1.3-2015-front.jpeg",
+        "car-images/proton-saga-flx-1.3-2015-back.jpeg",
+        "car-images/proton-saga-flx-1.3-2015-steering.jpeg",
+        "car-images/proton-saga-flx-1.3-2015-interior-front.jpeg",
+        "car-images/proton-saga-flx-1.3-2015-interior-back.jpeg"
+      ],
       "color": "",
       "transmission": "",
       "brand": "Proton",
