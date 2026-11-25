@@ -1,0 +1,19 @@
+
+{
+  "id": "proton-perdana",
+  "brand": "Proton",
+  "model": "Perdana 2.0",
+  "year": 2018,
+  "price": 38999,
+  "color": "",
+  "mileage": null,
+  "transmission": "Automatic",
+  "status": "available",
+  "photos": [
+    "car-images/whatsapp-image-2026-11-18-at-1.19.20-pm.jpeg",
+    "car-images/whatsapp-image-2026-11-18-at-1.19.20-pm1.jpeg",
+    "car-images/whatsapp-image-2026-11-18-at-1.19.21-pm2.jpeg",
+    "car-images/whatsapp-image-2026-11-18-at-1.19.21-pm3.jpeg",
+    "car-images/5.jpeg"
+  ]
+}
