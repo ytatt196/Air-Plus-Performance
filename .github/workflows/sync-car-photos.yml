@@ -1,3 +1,4 @@
+
 name: Sync Car Photo Galleries
 
 on:
@@ -14,6 +15,7 @@ permissions:
 concurrency:
   group: vehicle-data-production
   cancel-in-progress: false
+  queue: max
 
 jobs:
   sync-photos:
@@ -41,59 +43,69 @@ jobs:
             git reset --hard origin/main
 
             python3 - <<'PY'
-            import json
-            from pathlib import Path
+          import json
+          from pathlib import Path
 
-            extensions = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
-            changed = 0
+          extensions = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
+          changed = 0
 
-            for record in sorted(Path("cars").glob("*/index.json")):
-                folder = record.parent / "photos"
-                if not folder.is_dir():
-                    continue
+          for record in sorted(Path("cars").glob("*/index.json")):
+              folder = record.parent / "photos"
+              if not folder.is_dir():
+                  continue
 
-                data = json.loads(record.read_text(encoding="utf-8"))
-                photos = data.get("photos")
+              data = json.loads(record.read_text(encoding="utf-8"))
+              photos = data.get("photos")
 
-                if photos is None:
-                    photos = []
+              if photos is None:
+                  photos = []
 
-                if not isinstance(photos, list):
-                    raise ValueError(f"Invalid photos list: {record}")
+              if not isinstance(photos, list):
+                  raise ValueError(f"Invalid photos list: {record}")
 
-                known = {
-                    Path(str(photo)).name.casefold()
-                    for photo in photos
-                }
+              known = {
+                  Path(str(photo)).name.casefold()
+                  for photo in photos
+              }
 
-                added = []
+              added = []
 
-                for file in sorted(folder.iterdir(), key=lambda p: p.name.casefold()):
-                    if not file.is_file() or file.suffix.lower() not in extensions:
-                        continue
+              for file in sorted(
+                  folder.iterdir(),
+                  key=lambda p: p.name.casefold()
+              ):
+                  if not file.is_file():
+                      continue
 
-                    if file.name.casefold() in known:
-                        continue
+                  if file.suffix.lower() not in extensions:
+                      continue
 
-                    photos.append(file.name)
-                    known.add(file.name.casefold())
-                    added.append(file.name)
+                  if file.name.casefold() in known:
+                      continue
 
-                if added:
-                    data["photos"] = photos
-                    record.write_text(
-                        json.dumps(data, ensure_ascii=False, indent=2) + "\n",
-                        encoding="utf-8"
-                    )
-                    changed += 1
-                    print(f"Updated {record}:")
-                    for name in added:
-                        print(f"  Added: {name}")
-                else:
-                    print(f"No changes: {record}")
+                  photos.append(file.name)
+                  known.add(file.name.casefold())
+                  added.append(file.name)
 
-            print(f"Updated vehicle records: {changed}")
-            PY
+              if added:
+                  data["photos"] = photos
+                  record.write_text(
+                      json.dumps(
+                          data,
+                          ensure_ascii=False,
+                          indent=2
+                      ) + "\n",
+                      encoding="utf-8"
+                  )
+                  changed += 1
+                  print(f"Updated {record}:")
+                  for name in added:
+                      print(f"  Added: {name}")
+              else:
+                  print(f"No changes: {record}")
+
+          print(f"Updated vehicle records: {changed}")
+          PY
 
             python3 scripts/build-cars.py
             cp cars.generated.json cars.json
