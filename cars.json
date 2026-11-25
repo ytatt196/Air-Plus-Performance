@@ -88,6 +88,22 @@
       "status": "available",
       "id": "proton-preve-2018",
       "year": 2018
+    },
+    {
+      "id": "proton-perdana-1",
+      "brand": "proton",
+      "model": "perdana 2.4",
+      "price": 43999,
+      "color": "Black",
+      "status": "available",
+      "photos": [
+        "cars/proton-perdana-1/photos/proton-perdana-2.4-front.jpeg",
+        "cars/proton-perdana-1/photos/proton-perdana-2.4-back.jpeg",
+        "cars/proton-perdana-1/photos/proton-perdana-2.4-engine.jpeg",
+        "cars/proton-perdana-1/photos/proton-perdana-2.4-steering.jpeg",
+        "cars/proton-perdana-1/photos/proton-perdana-2.4-interior-front.jpeg",
+        "cars/proton-perdana-1/photos/proton-perdana-2.4-interior-back.jpeg"
+      ]
     }
   ]
 }
