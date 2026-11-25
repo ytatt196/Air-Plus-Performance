@@ -4,7 +4,7 @@ name: Test Car Data Generator
 on:
   push:
     branches:
-      - cms-gallery-upgrade
+      - main
     paths:
       - "scripts/build-cars.py"
       - "cars/*/index.json"
