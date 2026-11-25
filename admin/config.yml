@@ -72,7 +72,9 @@ collections:
       
       - { label: "Year", name: "year", widget: "number", value_type: "int", required: false }
 
-      - { label: "Price (RM)", name: "price", widget: "number", value_type: "int", min: 0 }
+      
+      - { label: "Price (RM)", name: "price", widget: "number", value_type: "int", min: 0, required: false }
+
       - { label: "Colour", name: "color", widget: "string", required: false }
       - { label: "Mileage (km)", name: "mileage", widget: "number", value_type: "int", min: 0, required: false }
       - label: "Transmission"
