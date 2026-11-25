@@ -677,7 +677,12 @@ function renderCars() {
 
     const price = document.createElement("div");
     price.className = "car-price";
-    price.textContent = `RM${Number(car.price).toLocaleString("en-MY")}`;
+    price.textContent =
+        car.price !== null &&
+        car.price !== undefined &&
+        car.price !== ""
+          ? `RM${Number(car.price).toLocaleString("en-MY")}`
+          : "Price on Request";
 
     const link = document.createElement("a");
     link.className = "button";
@@ -735,10 +740,20 @@ function searchCars() {
 
   cars.forEach((car, index) => {
     const name = `${car.brand} ${car.model}`.toLowerCase();
+       
     const match = name.includes(query)
       && (!brand || car.brand === brand)
       && (!model || car.model === model)
-      && (!maxPrice || Number(car.price) <= maxPrice);
+      && (
+        !maxPrice ||
+        (
+          car.price !== null &&
+          car.price !== undefined &&
+          car.price !== "" &&
+          Number.isFinite(Number(car.price)) &&
+          Number(car.price) <= maxPrice
+        )
+      );
 
     cards[index].style.display = match ? "" : "none";
     if (match) visible++;
