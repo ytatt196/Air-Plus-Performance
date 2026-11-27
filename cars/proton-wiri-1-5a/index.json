@@ -1,0 +1,16 @@
+{
+  "id": "Proton-Wiri-1.5a",
+  "brand": "Proton",
+  "model": "Wira 1.5A",
+  "price": 3500,
+  "color": "Gold",
+  "transmission": "Automatic",
+  "status": "sold",
+  "photos": [
+    "proton-wira-front.jpeg",
+    "proton-wira-back.jpeg",
+    "proton-wira-steering.jpeg",
+    "proton-wira-interior-front.jpeg",
+    "proton-wira-interior-back.jpeg"
+  ]
+}
