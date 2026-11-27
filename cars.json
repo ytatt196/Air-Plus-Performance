@@ -184,6 +184,22 @@
       ],
       "color": "Silver",
       "status": "available"
+    },
+    {
+      "id": "proton-wiri-1-5a",
+      "brand": "Proton",
+      "model": "Wira 1.5A",
+      "price": 3500,
+      "color": "Gold",
+      "transmission": "Automatic",
+      "status": "sold",
+      "photos": [
+        "cars/proton-wiri-1-5a/photos/proton-wira-front.jpeg",
+        "cars/proton-wiri-1-5a/photos/proton-wira-back.jpeg",
+        "cars/proton-wiri-1-5a/photos/proton-wira-steering.jpeg",
+        "cars/proton-wiri-1-5a/photos/proton-wira-interior-front.jpeg",
+        "cars/proton-wiri-1-5a/photos/proton-wira-interior-back.jpeg"
+      ]
     }
   ]
 }
